@@ -1,0 +1,605 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  code, kbd, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP-FIRST RESPONSIVE SYSTEM (Desktop Default -> Tablet <=1024px -> Mobile <=768px / <=480px)
+   Wrapped in @layer components so Tailwind utility classes (colors/borders/rings) always take precedence
+   ========================================================================== */
+@layer components {
+  /* 1. App Shell & Navbar (Desktop First) */
+  .app-container {
+    max-width: 80rem; /* 1280px */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .app-header-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .app-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    background-color: rgba(241, 245, 249, 0.85);
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .app-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .app-main {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* 2. Exam Control Bar & 2-Column Exam Layout (Desktop First) */
+  .exam-control-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 1rem 1.5rem;
+  }
+
+  .exam-control-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .exam-progress-wrap {
+    flex: 1 1 0%;
+    max-width: 34rem;
+  }
+
+  .exam-actions-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.625rem;
+  }
+
+  .exam-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .exam-main-col {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .exam-sidebar-col {
+    position: sticky;
+    top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* 3. Question Card & Bottom Navigation (Desktop First) */
+  .question-card-header {
+    padding: 1rem 1.5rem;
+    background-color: rgba(248, 250, 252, 0.75);
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .question-card-body {
+    padding: 1.75rem 2rem;
+  }
+
+  .question-option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.125rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.875rem;
+    transition: all 0.15s ease;
+  }
+
+  .question-option-text {
+    flex: 1 1 0%;
+    min-width: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+
+  .question-bottom-nav {
+    background-color: #ffffff;
+    border-radius: 0.875rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .mobile-map-trigger {
+    display: none;
+  }
+
+  /* 4. 70-Question Navigation Grid (Desktop First: 7 columns in sidebar) */
+  .question-grid-cells {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.375rem;
+  }
+
+  /* 5. ResultView & HistoryView & StudyBankView Grids (Desktop First) */
+  .result-summary-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .result-section-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+
+  .result-filter-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .result-status-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .review-option-row {
+    padding: 0.875rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .history-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .history-item-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .study-header-top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .study-tab-switcher {
+    display: inline-flex;
+    background-color: #f1f5f9;
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .study-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.15s ease;
+  }
+
+  .study-tab-btn.is-active {
+    background-color: #0f172a;
+    color: #ffffff;
+  }
+
+  .study-section-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+  }
+
+  .study-section-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4375rem 0.75rem;
+    border-radius: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    color: #475569;
+    transition: all 0.15s ease;
+  }
+
+  .study-section-pill.is-active {
+    background-color: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+  }
+
+  .study-filter-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .study-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .study-search-group {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .golden-rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+
+  .anchor-keywords-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* ==========================================================================
+     TABLET BREAKPOINT (<= 1024px)
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .app-container {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .app-main {
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .exam-control-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .exam-progress-wrap {
+      max-width: 100%;
+    }
+
+    .exam-actions-wrap {
+      justify-content: space-between;
+    }
+
+    .exam-layout {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .exam-sidebar-col {
+      position: static;
+    }
+
+    .question-grid-cells {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .mobile-map-trigger {
+      display: inline-flex;
+    }
+
+    .result-summary-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .result-section-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .result-filter-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .history-kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .history-item-card {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .study-header-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .study-filter-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .study-search-group {
+      width: 100%;
+    }
+  }
+
+  /* ==========================================================================
+     MOBILE LANDSCAPE & LARGE PHONES BREAKPOINT (<= 768px)
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .app-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .app-header-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.625rem;
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+
+    .app-nav {
+      width: 100%;
+      overflow-x: auto;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .app-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .app-nav-btn {
+      flex: 1 0 auto;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .app-main {
+      padding-top: 1rem;
+      padding-bottom: 5rem;
+    }
+
+    .exam-control-card {
+      padding: 0.875rem 1rem;
+      border-radius: 0.875rem;
+    }
+
+    .question-card-header {
+      padding: 0.875rem 1rem;
+    }
+
+    .question-card-body {
+      padding: 1.125rem 1rem;
+    }
+
+    .question-option-btn {
+      padding: 0.875rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+
+    .question-option-text {
+      font-size: 0.875rem;
+    }
+
+    .question-bottom-nav {
+      position: sticky;
+      bottom: 0.5rem;
+      z-index: 30;
+      padding: 0.75rem 0.875rem;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.08);
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    .question-grid-cells {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.375rem;
+    }
+
+    .result-section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-status-pills {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .result-status-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .result-status-pills > button {
+      flex-shrink: 0;
+    }
+
+    .review-option-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .study-tab-switcher {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .study-tab-btn {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .study-section-pills {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .study-section-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .study-section-pill {
+      flex-shrink: 0;
+    }
+
+    .study-search-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .golden-rules-grid,
+    .anchor-keywords-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==========================================================================
+     MOBILE PORTRAIT BREAKPOINT (<= 480px)
+     ========================================================================== */
+  @media (max-width: 480px) {
+    .app-container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .exam-actions-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .exam-actions-wrap > * {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .question-grid-cells {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.375rem;
+    }
+
+    .result-section-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .history-kpi-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.625rem;
+    }
+
+    .study-tab-switcher {
+      grid-template-columns: 1fr;
+    }
+  }
+}
