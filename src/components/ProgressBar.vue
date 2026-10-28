@@ -17,14 +17,14 @@ const percentage = computed(() => {
   <div class="w-full">
     <div class="flex items-center justify-between text-xs font-medium text-slate-600 mb-1.5">
       <div class="flex items-center gap-2">
-        <span>Tiến độ hoàn thành</span>
+        <span>Exam Progress</span>
         <span class="font-mono font-semibold text-slate-900">
-          {{ answeredCount }}/{{ totalCount }} câu
+          {{ answeredCount }}/{{ totalCount }} answered
         </span>
       </div>
       <div class="flex items-center gap-3">
         <span v-if="flaggedCount && flaggedCount > 0" class="text-amber-600 font-medium">
-          {{ flaggedCount }} đánh dấu
+          {{ flaggedCount }} flagged
         </span>
         <span class="font-mono text-slate-700 font-semibold">{{ percentage }}%</span>
       </div>

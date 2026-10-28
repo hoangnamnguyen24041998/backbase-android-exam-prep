@@ -11,12 +11,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong triết lý phát triển sản phẩm trên nền tảng Backbase Engagement Banking Platform (EBP), nguyên tắc cốt lõi "Adopt before Adapt" mang ý nghĩa gì đối với đội ngũ phát triển Android?',
+    question: 'In the product development philosophy on the Backbase Engagement Banking Platform (EBP), what does the core principle "Adopt before Adapt" mean for the Android development team?',
     options: [
-      'Luôn tự viết lại toàn bộ UI và Business Logic từ đầu bằng Jetpack Compose nhưng sử dụng chung OpenAPI spec của Backbase.',
-      'Ưu tiên sử dụng tối đa các Modelbank Journeys và OOTB (Out-of-the-Box) capabilities thông qua cấu hình và theming; chỉ tùy biến sâu (Extend) hoặc xây mới (Build) khi có yêu cầu nghiệp vụ đặc thù thực sự khác biệt.',
-      'Sao chép (clone) mã nguồn của các Backbase Journey về repository nội bộ của ngân hàng để tự do chỉnh sửa trực tiếp các file Kotlin bên trong.',
-      'Chỉ sử dụng tầng mạng (Networking SDK) của Backbase và xây dựng lại toàn bộ kiến trúc màn hình để tránh phụ thuộc vào chu kỳ nâng cấp của hãng.'
+      'Always rewrite the entire UI and business logic from scratch using Jetpack Compose while sharing the Backbase OpenAPI specification.',
+      'Maximize the use of Modelbank Journeys and Out-of-the-Box (OOTB) capabilities through configuration and theming; only deeply customize (Extend) or build from scratch (Build) when there are truly unique business requirements.',
+      'Clone the source code of Backbase Journeys into the bank\'s internal repository to freely modify the Kotlin files directly inside.',
+      'Only use the Backbase Networking SDK layer and rebuild the entire screen architecture to avoid depending on the vendor\'s upgrade cycle.'
     ],
     correctAnswers: [1],
     explanation: 'Triết lý "Adopt before Adapt" khuyến nghị ngân hàng tận dụng tối đa 80% tính năng Out-of-the-Box (OOTB) sẵn có thông qua cấu hình (Configuration), Feature Flags và Mobile Design System (Theming) để rút ngắn Time-to-Market và đảm bảo khả năng nâng cấp (upgradeability) mượt mà khi Backbase ra phiên bản mới. Chỉ 20% phần tạo lợi thế cạnh tranh đặc thù mới nên Extend hoặc Build.'
@@ -26,7 +26,7 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Quy trình triển khai chuẩn "Backbase Way of Working" bao gồm 4 giai đoạn chính diễn ra theo thứ tự nào sau đây?',
+    question: 'The standard implementation process "Backbase Way of Working" consists of four main phases occurring in which of the following orders?',
     options: [
       'Design -> Code -> Test -> Release',
       'Discover -> Adopt -> Extend -> Deploy & Run',
@@ -41,12 +41,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Những thành phần nào sau đây thuộc lớp kiến trúc tổng thể của Backbase Engagement Banking Platform (EBP)? (Chọn 3 đáp án đúng)',
+    question: 'Which of the following components belong to the overall architectural layers of the Backbase Engagement Banking Platform (EBP)? (Select 3)',
     options: [
       'Experience Layer (Web & Mobile Journeys, Retail/Business/Wealth Banking Apps)',
-      'Digital Banking Services / Banking Business Services (DBS / BBS - các microservices nghiệp vụ ngân hàng như Accounts, Payments, Cards)',
-      'Integration Services / Grand Central (kết nối và điều phối dữ liệu với Core Banking và bên thứ 3)',
-      'Hệ quản trị cơ sở dữ liệu lõi Core Banking truyền thống thay thế hoàn toàn hệ thống AS400/Mainframe của ngân hàng'
+      'Digital Banking Services / Banking Business Services (DBS / BBS - banking business microservices such as Accounts, Payments, Cards)',
+      'Integration Services / Grand Central (data connectivity and orchestration with Core Banking and third-party providers)',
+      'A traditional Core Banking relational database management system that completely replaces the bank\'s AS400/Mainframe system'
     ],
     correctAnswers: [0, 1, 2],
     explanation: 'Kiến trúc Backbase EBP đứng phía trên hệ thống Core Banking (System of Record) chứ không thay thế Core Banking. Nó bao gồm: 1) Integration Layer (Grand Central / Integration Services) để giao tiếp với Core Banking; 2) Capability Layer (Digital Banking Services - DBS/BBS & Identity/Access Control); và 3) Experience Layer (Mobile Android/iOS Journeys & Web Widgets).'
@@ -56,12 +56,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong thuật ngữ kiến trúc Mobile của Backbase, một "Journey" (ví dụ: Accounts & Transactions Journey, Cards Management Journey) được định nghĩa chính xác nhất là gì?',
+    question: 'In Backbase Mobile architectural terminology, how is a "Journey" (e.g., Accounts & Transactions Journey, Cards Management Journey) most accurately defined?',
     options: [
-      'Một UI Component đơn lẻ như một nút bấm (Button) hoặc một ô nhập liệu (TextField) đã được gắn style của ngân hàng.',
-      'Một thư viện độc lập đóng gói trọn vẹn một luồng nghiệp vụ người dùng hoàn chỉnh (End-to-End user flow) bao gồm cả UI Screens, ViewModels, UseCases interface và Navigation nội bộ.',
-      'Một tập hợp các file cấu hình JSON tĩnh chứa danh sách URL của máy chủ backend.',
-      'Một ứng dụng Android APK độc lập được cài đặt riêng rẽ trên máy người dùng cho từng tính năng ngân hàng.'
+      'A single UI Component such as a Button or a TextField styled according to the bank\'s brand.',
+      'A self-contained library module that encapsulates a complete end-to-end business user flow, including UI Screens, ViewModels, UseCase interfaces, and internal Navigation.',
+      'A collection of static JSON configuration files containing backend server URL lists.',
+      'A standalone Android APK application installed separately on the user\'s device for each banking feature.'
     ],
     correctAnswers: [1],
     explanation: 'Trong Backbase Mobile Architecture, một Journey là một module tính năng độc lập (Feature Module) giải quyết một luồng nghiệp vụ hoàn chỉnh của người dùng (ví dụ: Xem danh sách tài khoản và chi tiết giao dịch, hoặc Quản lý thẻ). Một Journey bao gồm Presentation layer (Screens, ViewModels), Domain contract (UseCase interfaces) và Navigation graph nội bộ của riêng luồng đó.'
@@ -71,12 +71,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Tại sao Backbase tuyệt đối khuyến cáo KHÔNG được decompile hoặc chỉnh sửa trực tiếp mã nguồn bên trong các thư viện AAR của Backbase Journey (Forking)?',
+    question: 'Why does Backbase strictly advise AGAINST decompiling or directly modifying the source code inside Backbase Journey AAR libraries (Forking)?',
     options: [
-      'Vì trình biên dịch Kotlin sẽ báo lỗi cú pháp ngay lập tức nếu copy code từ AAR.',
-      'Vì việc Forking làm mất hoàn toàn khả năng nhận các bản vá bảo mật, sửa lỗi và tính năng mới tự động từ Backbase (Zero Upgradeability), biến dự án thành gánh nặng bảo trì khổng lồ.',
-      'Vì hệ điều hành Android không cho phép đóng gói các class trùng tên package.',
-      'Vì Backbase SDK sẽ tự động xóa dữ liệu máy ảo nếu phát hiện file AAR bị giải nén.'
+      'Because the Kotlin compiler will immediately throw a syntax error if code is copied from an AAR.',
+      'Because forking completely breaks the ability to automatically receive security patches, bug fixes, and new features from Backbase (Zero Upgradeability), turning the project into a massive maintenance burden.',
+      'Because the Android operating system does not allow packaging classes with duplicate package names.',
+      'Because the Backbase SDK will automatically wipe virtual machine data if it detects that an AAR file has been extracted.'
     ],
     correctAnswers: [1],
     explanation: 'Khi một dự án thực hiện Forking (sao chép code OOTB ra ngoài để sửa trực tiếp), nhánh code đó sẽ bị tách rời khỏi lộ trình phát triển chính thức của Backbase. Mỗi khi Backbase tung ra bản cập nhật bảo mật hoặc nâng cấp phiên bản lớn, đội dự án sẽ phải merge thủ công hàng nghìn dòng code, gây rủi ro lỗi nghiêm trọng và tốn kém chi phí.'
@@ -86,12 +86,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Khả năng "White-labeling" trong Backbase Mobile SDK cho phép một tập đoàn tài chính đạt được những lợi ích kỹ thuật nào sau đây từ cùng một codebase Android duy nhất? (Chọn 2 đáp án đúng)',
+    question: 'Which of the following technical benefits does the "White-labeling" capability in the Backbase Mobile SDK allow a financial group to achieve from a single shared Android codebase? (Select 2)',
     options: [
-      'Xây dựng nhiều ứng dụng cho các thương hiệu con hoặc phân khúc khác nhau (ví dụ: Retail Banking, Business Banking, hoặc các ngân hàng thành viên ở nhiều quốc gia) thông qua Gradle Product Flavors.',
-      'Thay đổi toàn bộ bộ nhận diện thương hiệu (Màu sắc, Typography, Bo góc, Iconography, Logo) và cấu hình tính năng (Configuration/Feature Flags) cho từng bản build mà không cần sửa đổi logic của Journey.',
-      'Chạy trực tiếp mã nguồn Swift của iOS bên trong máy ảo Dalvik/ART của Android.',
-      'Tự động chuyển đổi ngôn ngữ lập trình từ Kotlin sang Flutter khi xuất bản ứng dụng.'
+      'Build multiple applications for different sub-brands or segments (e.g., Retail Banking, Business Banking, or member banks across multiple countries) using Gradle Product Flavors.',
+      'Change the entire brand identity (Colors, Typography, Corner Radius, Iconography, Logos) and feature configuration (Configuration/Feature Flags) for each build variant without modifying Journey logic.',
+      'Run iOS Swift source code directly inside the Android Dalvik/ART virtual machine.',
+      'Automatically convert the programming language from Kotlin to Flutter when publishing the application.'
     ],
     correctAnswers: [0, 1],
     explanation: 'White-labeling trong Backbase kết hợp sức mạnh của Android Gradle Product Flavors, Mobile Design System (MDS Tokens) và Journey Configuration. Nhờ đó, từ một codebase chung, ngân hàng có thể xuất bản nhiều app cho nhiều thương hiệu/quốc gia khác nhau với giao diện và tập tính năng bật/tắt hoàn toàn riêng biệt.'
@@ -101,12 +101,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong hệ sinh thái Backbase, dịch vụ "Digital Banking Services" (DBS - trước đây thường gọi là BBS) đóng vai trò gì đối với ứng dụng Mobile Android?',
+    question: 'In the Backbase ecosystem, what role do "Digital Banking Services" (DBS - formerly commonly referred to as BBS) play for an Android Mobile application?',
     options: [
-      'Cung cấp các giao diện người dùng (UI Fragments) được render sẵn dưới dạng HTML gửi về điện thoại.',
-      'Cung cấp các RESTful APIs chuẩn hóa (theo đặc tả OpenAPI) đại diện cho các năng lực nghiệp vụ ngân hàng (Accounts, Payments, Contacts, Notifications, Messages...) kèm cơ chế kiểm soát quyền truy cập (Entitlements).',
-      'Là công cụ biên dịch mã nguồn Kotlin trên đám mây thay cho Android Studio.',
-      'Là thư viện quản lý ảnh động (Lottie animations) trên thiết bị di động.'
+      'Provide pre-rendered UI Fragments in HTML format sent to the mobile device.',
+      'Provide standardized RESTful APIs (following OpenAPI specifications) representing banking business capabilities (Accounts, Payments, Contacts, Notifications, Messages, etc.) along with access control mechanisms (Entitlements).',
+      'Serve as a cloud-based Kotlin compiler tool replacing Android Studio.',
+      'Serve as a library for managing Lottie animations on mobile devices.'
     ],
     correctAnswers: [1],
     explanation: 'Digital Banking Services (DBS) là tập hợp các microservices cốt lõi ở tầng Capability của Backbase. Chúng cung cấp các API chuẩn OpenAPI để ứng dụng Mobile giao tiếp thông qua các thư viện GenClient (như Accounts GenClient, Arrangements GenClient, Payment Orders GenClient...).'
@@ -116,12 +116,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khi phân tích yêu cầu của khách hàng trong giai đoạn "Discover", nếu một yêu cầu nghiệp vụ chỉ khác biệt nhỏ về bố cục hiển thị so với OOTB Journey nhưng không mang lại giá trị kinh doanh cốt lõi, chuyên gia tư vấn kỹ thuật Backbase nên làm gì?',
+    question: 'When analyzing customer requirements during the "Discover" phase, if a business requirement only differs slightly in visual layout from an OOTB Journey without providing core business value, what should a Backbase technical consultant do?',
     options: [
-      'Đồng ý viết lại toàn bộ màn hình đó từ con số 0 (Build from scratch) để chiều lòng khách hàng.',
-      'Thách thức tích cực (Challenge) yêu cầu đó bằng cách chứng minh lợi ích về chi phí sở hữu (TCO), thời gian ra mắt (Time-to-Market) và khả năng nâng cấp khi giữ nguyên thiết kế chuẩn OOTB (Adopt).',
-      'Yêu cầu đội ngũ Backend sửa đổi cấu trúc bảng trong Core Banking.',
-      'Tắt toàn bộ tính năng đó khỏi ứng dụng di động.'
+      'Agree to rewrite the entire screen from scratch (Build from scratch) to please the client.',
+      'Constructively challenge the requirement by demonstrating the benefits in Total Cost of Ownership (TCO), Time-to-Market, and upgradeability when staying close to the standard OOTB design (Adopt).',
+      'Ask the Backend team to modify the database table schemas inside the Core Banking system.',
+      'Disable that entire feature from the mobile application.'
     ],
     correctAnswers: [1],
     explanation: 'Một phần quan trọng của Backbase Way of Working trong giai đoạn Discover là hướng dẫn khách hàng bám sát chuẩn OOTB ("Stay close to standard"). Nếu sự khác biệt UI không tạo ra giá trị kinh doanh vượt trội, việc thuyết phục khách hàng Adopt OOTB sẽ giúp giảm mạnh tổng chi phí sở hữu (Total Cost of Ownership - TCO) và rủi ro bảo trì.'
@@ -131,12 +131,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khái niệm "Modelbank" trong nền tảng Backbase là gì?',
+    question: 'What is the concept of "Modelbank" in the Backbase platform?',
     options: [
-      'Một ngân hàng thương mại thực tế có trụ sở tại Amsterdam chuyên cho vay mua nhà.',
-      'Một ứng dụng ngân hàng tham chiếu hoàn chỉnh (Reference Implementation) được lắp ghép sẵn từ các OOTB Journeys, Design System và cấu hình mẫu tốt nhất theo từng phân khúc (Retail, SME, Wealth), dùng làm điểm khởi đầu (accelerator) cho mọi dự án.',
-      'Một bộ công cụ mô phỏng máy học (Machine Learning Model) dùng để chấm điểm tín dụng.',
-      'Một plugin kiểm tra lỗi chính tả trong Android Studio.'
+      'An actual commercial bank headquartered in Amsterdam specializing in mortgage loans.',
+      'A complete reference banking application (Reference Implementation) pre-assembled from OOTB Journeys, Design System, and best-practice sample configurations for each segment (Retail, SME, Wealth), serving as an accelerator starting point for every project.',
+      'A machine learning simulation toolkit used for credit scoring.',
+      'A spell-checking plugin inside Android Studio.'
     ],
     correctAnswers: [1],
     explanation: 'Modelbank là ứng dụng mẫu chuẩn mực do Backbase xây dựng sẵn, tích hợp đầy đủ các Journeys, UseCases, Navigation và Design System theo đúng best practices cho từng phân khúc (Retail, Business/SME, Wealth). Các dự án thực tế sẽ khởi tạo từ Modelbank để có ngay một ứng dụng chạy được từ ngày đầu tiên.'
@@ -146,12 +146,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Trong kiến trúc bảo mật và phân quyền của Backbase EBP, dịch vụ Identity & Access Control (Entitlements) đảm nhiệm những vai trò nào đối với ứng dụng Mobile? (Chọn 2 đáp án đúng)',
+    question: 'In the security and authorization architecture of Backbase EBP, what roles does the Identity & Access Control (Entitlements) service fulfill for the Mobile application? (Select 2)',
     options: [
-      'Xác thực danh tính người dùng (Authentication) dựa trên chuẩn OAuth2 / OpenID Connect (OIDC) kết hợp với Keycloak/Identity Server.',
-      'Kiểm soát phân quyền chi tiết (Fine-grained Authorization / Entitlements) dựa trên Legal Entity, Service Agreement, Job Role và Function Groups để quyết định người dùng được phép xem hay thực hiện hành động nào trên App.',
-      'Tự động nén dung lượng file ảnh PNG trong thư mục res/drawable của dự án Android.',
-      'Thay thế hoàn toàn hệ thống quản lý bộ nhớ Garbage Collector của máy ảo Android.'
+      'User Authentication based on OAuth2 / OpenID Connect (OIDC) standards integrated with Keycloak/Identity Server.',
+      'Fine-grained Authorization (Entitlements) based on Legal Entity, Service Agreement, Job Role, and Function Groups to determine which data users are allowed to view or which actions they can perform in the app.',
+      'Automatically compressing PNG image file sizes inside the res/drawable folder of the Android project.',
+      'Completely replacing the Garbage Collector memory management system of the Android virtual machine.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Backbase Identity (xây dựng trên nền tảng mở rộng của Keycloak/OIDC) quản lý xác thực (Authentication, FIDO2/Biometrics) và Access Control (Entitlements) quản lý phân quyền chi tiết (Service Agreement, Data Groups, Function Groups). Trên Mobile, các Journey có thể ẩn/hiện hoặc khóa tính năng dựa trên quyền (Entitlements) của user hiện tại.'
@@ -161,12 +161,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Sự khác biệt cốt lõi giữa việc "Adopt" một Journey và "Extend" một Journey trong dự án Backbase Android là gì?',
+    question: 'What is the core difference between "Adopting" a Journey and "Extending" a Journey in a Backbase Android project?',
     options: [
-      'Adopt yêu cầu viết lại toàn bộ UseCase, còn Extend chỉ đổi màu sắc trong file XML.',
-      'Adopt là cấu hình các tham số, bật/tắt feature flags và áp dụng bộ nhận diện thương hiệu (MDS Theme) mà không thay đổi hành vi/luồng nghiệp vụ; trong khi Extend là sử dụng các hook/extension points (Custom UseCase, Decorator, Screen Factory, Slot API) để can thiệp sâu hơn vào dữ liệu hoặc màn hình.',
-      'Adopt chỉ áp dụng cho ứng dụng iOS, còn Extend chỉ áp dụng cho ứng dụng Android.',
-      'Không có sự khác biệt nào, hai thuật ngữ này hoàn toàn đồng nghĩa trong tài liệu Backbase.'
+      'Adopt requires rewriting the entire UseCase, whereas Extend only changes colors in XML files.',
+      'Adopt involves configuring parameters, toggling feature flags, and applying brand identity (MDS Theme) without altering behavior or business flows; whereas Extend uses official hooks/extension points (Custom UseCase, Decorator, Screen Factory, Slot API) to intervene deeper into data or screens.',
+      'Adopt only applies to iOS applications, whereas Extend only applies to Android applications.',
+      'There is no difference; these two terms are completely synonymous in Backbase documentation.'
     ],
     correctAnswers: [1],
     explanation: 'Trong thang độ tùy biến của Backbase: Adopt = dùng nguyên bản OOTB + truyền Configuration object + áp dụng Theme/Tokens. Extend = giữ khung Journey OOTB nhưng can thiệp có kiểm soát thông qua các cơ chế mở rộng chính thức (như bọc Decorator quanh UseCase, truyền Custom Screen Factory hoặc chèn View vào Slot).'
@@ -176,12 +176,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khi nào đội ngũ phát triển Android mới nên lựa chọn phương án "Build" (xây dựng một Journey hoàn toàn mới từ đầu) thay vì "Adopt" hoặc "Extend"?',
+    question: 'When should the Android development team choose the "Build" approach (building a brand-new Journey from scratch) instead of "Adopt" or "Extend"?',
     options: [
-      'Khi ngân hàng muốn đổi màu nút bấm chính từ màu xanh dương sang màu đỏ.',
-      'Khi ngân hàng muốn ẩn một trường thông tin không cần thiết trên màn hình chi tiết giao dịch mà Configuration đã hỗ trợ sẵn cờ ẩn/hiện.',
-      'Khi ngân hàng triển khai một luồng nghiệp vụ hoàn toàn mới đặc thù của địa phương (ví dụ: tích hợp ví định danh điện tử quốc gia hoặc mua vé số nội địa) mà Backbase chưa có bất kỳ OOTB Journey nào tương ứng.',
-      'Khi lập trình viên mới vào dự án chưa kịp đọc tài liệu về Configuration của OOTB Journey.'
+      'When the bank wants to change the primary button color from blue to red.',
+      'When the bank wants to hide an unnecessary information field on the transaction details screen where the Configuration already supports a visibility toggle flag.',
+      'When the bank implements a completely new localized business flow (e.g., integrating a national digital identity wallet or purchasing domestic lottery tickets) for which Backbase has no corresponding OOTB Journey.',
+      'When a new developer joining the project has not yet read the Configuration documentation of the OOTB Journey.'
     ],
     correctAnswers: [2],
     explanation: 'Phương án "Build" chỉ được sử dụng cho các luồng nghiệp vụ hoàn toàn mới (Greenfield features) không tồn tại trong danh mục OOTB Journeys của Backbase. Khi tự Build một Journey mới, đội ngũ vẫn phải tuân thủ nghiêm ngặt chuẩn kiến trúc của Backbase (Clean Architecture, MDS Components, Router/UseCase tách rời) để đồng nhất với toàn hệ thống.'
@@ -191,12 +191,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong nền tảng Backbase, lớp "Grand Central" (Integration Platform) giải quyết bài toán kiến trúc nào sau đây?',
+    question: 'In the Backbase platform, which of the following architectural challenges does the "Grand Central" (Integration Platform) layer solve?',
     options: [
-      'Đóng vai trò là cổng tích hợp chuẩn hóa (Integration Hub & Connectors) giúp kết nối các Digital Banking Services của Backbase với nhiều hệ thống Core Banking, hệ thống quản lý thẻ (CMS) và cổng thanh toán bên ngoài mà không làm ảnh hưởng đến ứng dụng Mobile.',
-      'Là thư viện quản lý điều hướng giữa các Fragment bên trong ứng dụng Android.',
-      'Là công cụ thiết kế giao diện đồ họa thay thế cho Figma.',
-      'Là dịch vụ gửi thông báo đẩy thay thế cho Firebase Cloud Messaging trên thiết bị.'
+      'Acts as a standardized Integration Hub & Connectors layer that connects Backbase Digital Banking Services with multiple Core Banking systems, Card Management Systems (CMS), and external payment gateways without impacting the Mobile application.',
+      'Serves as a library managing navigation between Fragments inside the Android application.',
+      'Serves as a graphical UI design tool replacing Figma.',
+      'Serves as a push notification delivery service replacing Firebase Cloud Messaging on devices.'
     ],
     correctAnswers: [0],
     explanation: 'Grand Central là nền tảng Integration-Platform-as-a-Service (iPaaS) của Backbase, cung cấp các pre-built connectors để kết nối các dịch vụ DBS với hệ thống lõi của ngân hàng (Core Banking như Temenos, Mambu, Finastra...). Nhờ sự tách biệt này, ứng dụng Android chỉ cần làm việc với chuẩn dữ liệu thống nhất của DBS.'
@@ -206,12 +206,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Những thành phần nào sau đây được cung cấp sẵn bởi tầng nền tảng "Mobile SDK / Core Foundations" của Backbase trên Android? (Chọn 3 đáp án đúng)',
+    question: 'Which of the following components are provided out-of-the-box by Backbase\'s "Mobile SDK / Core Foundations" layer on Android? (Select 3)',
     options: [
-      'Mobile Design System (MDS) cung cấp hệ thống Design Tokens và kho UI Components chuẩn ngân hàng.',
-      'Backbase Core & Networking SDK hỗ trợ quản lý phiên đăng nhập, bảo mật truyền tải (SSL Pinning), tự động đính kèm token và lưu trữ an toàn (Encrypted Storage).',
-      'GenClients (OpenAPI generated clients) đóng gói sẵn các lệnh gọi mạng tới từng dịch vụ DBS.',
-      'Bộ trình điều khiển phần cứng (Hardware Kernel Drivers) để can thiệp trực tiếp vào sóng baseband 5G của điện thoại.'
+      'Mobile Design System (MDS) providing a system of Design Tokens and banking-grade UI Components.',
+      'Backbase Core & Networking SDK supporting session management, transport security (SSL Pinning), automatic token attachment, and secure storage (Encrypted Storage).',
+      'GenClients (OpenAPI generated clients) pre-packaging network calls to individual DBS services.',
+      'Hardware Kernel Drivers to directly manipulate the phone\'s 5G baseband radio signals.'
     ],
     correctAnswers: [0, 1, 2],
     explanation: 'Tầng nền tảng Mobile của Backbase cung cấp 3 trụ cột chính cho các Journey hoạt động: 1) Core SDK (Networking, Auth, Secure Storage, Logging); 2) GenClients (các thư viện client sinh tự động từ OpenAPI spec của DBS); và 3) Mobile Design System (MDS) cho giao diện đồng nhất.'
@@ -221,12 +221,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Tỷ lệ phân bổ nỗ lực lý tưởng được Backbase khuyến nghị theo quy tắc "80/20" trong triển khai dự án có ý nghĩa gì?',
+    question: 'What does the ideal effort allocation ratio recommended by Backbase under the "80/20" rule in project delivery mean?',
     options: [
-      '80% ngân sách dành cho viết tài liệu và 20% ngân sách dành cho lập trình.',
-      'Tận dụng khoảng 80% năng lực sẵn có của nền tảng (OOTB Adoption & Configuration) để tập trung 20% nguồn lực kỹ thuật vào việc mở rộng/xây dựng các tính năng tạo sự khác biệt cạnh tranh trên thị trường (Differentiation).',
-      '80% mã nguồn viết bằng ngôn ngữ Java và 20% mã nguồn viết bằng Kotlin.',
-      'Chỉ kiểm thử 20% số lượng màn hình và bỏ qua 80% màn hình còn lại.'
+      '80% of the budget is spent on writing documentation and 20% on coding.',
+      'Leverage approximately 80% of the platform\'s existing capabilities (OOTB Adoption & Configuration) so that 20% of engineering resources can focus on extending/building features that create competitive differentiation in the market (Differentiation).',
+      '80% of the source code is written in Java and 20% is written in Kotlin.',
+      'Only test 20% of the screens and skip the remaining 80%.'
     ],
     correctAnswers: [1],
     explanation: 'Quy tắc 80/20 trong Backbase nhấn mạnh việc không "phát minh lại chiếc bánh xe" cho các tính năng ngân hàng tiêu chuẩn (đăng nhập, xem số dư, sao kê, chuyển tiền cơ bản - chiếm 80%), từ đó giải phóng nguồn lực kỹ thuật để dồn sức vào 20% các tính năng sáng tạo mang đậm bản sắc riêng của ngân hàng.'
@@ -236,12 +236,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong kiến trúc sản phẩm của Backbase, một "App" (ví dụ: Retail Banking App) khác với một "Journey" ở điểm nào?',
+    question: 'In Backbase product architecture, how does an "App" (e.g., Retail Banking App) differ from a "Journey"?',
     options: [
-      'Một App chỉ chứa đúng 1 màn hình duy nhất, còn Journey chứa nhiều màn hình.',
-      'App là tầng vỏ lắp ghép trên cùng (Host Application / Shell Module) có nhiệm vụ khởi tạo SDK, cấu hình Dependency Injection (Hilt/Koin), định nghĩa luồng điều hướng liên kết giữa nhiều Journeys (App-level Navigation) và áp dụng bộ Theme tổng thể.',
-      'App không được phép chứa file AndroidManifest.xml, chỉ có Journey mới có AndroidManifest.xml.',
-      'Journey là file thực thi cài lên máy người dùng, còn App chỉ là thư viện phụ trợ.'
+      'An App contains only a single screen, whereas a Journey contains multiple screens.',
+      'The App is the top-level assembly shell (Host Application / Shell Module) responsible for initializing the SDK, configuring Dependency Injection (Hilt/Koin), defining inter-Journey navigation flows (App-level Navigation), and applying the global Theme.',
+      'An App is not allowed to contain an AndroidManifest.xml file; only a Journey has an AndroidManifest.xml.',
+      'A Journey is the executable file installed on the user\'s device, while the App is merely an auxiliary library.'
     ],
     correctAnswers: [1],
     explanation: 'Application module (`:app`) đóng vai trò là chất keo kết dính (Orchestrator / Host). Nó không chứa chi tiết nghiệp vụ của từng tính năng mà chịu trách nhiệm khởi tạo `Backbase.initialize()`, nạp cấu hình DI kết nối các `UseCase` implementation với các `Journey`, và điều phối chuyển hướng giữa Journey A sang Journey B thông qua các Router implementations.'
@@ -251,12 +251,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Lợi ích lớn nhất của việc Backbase phân tách rạch ròi giữa giao diện Journey và phần thực thi lấy dữ liệu (UseCase implementation / GenClient) là gì?',
+    question: 'What is the greatest benefit of Backbase strictly decoupling the Journey UI from the data-fetching implementation (UseCase implementation / GenClient)?',
     options: [
-      'Giúp ứng dụng bắt buộc phải kết nối mạng liên tục mới mở được màn hình cài đặt.',
-      'Cho phép ngân hàng giữ nguyên toàn bộ giao diện và luồng màn hình của OOTB Journey nhưng có thể dễ dàng thay thế nguồn dữ liệu (ví dụ: gọi sang một API nội bộ khác của ngân hàng hoặc kết hợp dữ liệu từ 2 microservice) thông qua việc cung cấp một Custom UseCase implementation.',
-      'Làm tăng kích thước file APK lên gấp 5 lần để trông chuyên nghiệp hơn.',
-      'Ngăn cản việc viết Unit Test cho tầng Presentation.'
+      'It forces the application to maintain a continuous network connection just to open the settings screen.',
+      'It allows the bank to keep the entire UI and screen flows of an OOTB Journey intact while easily swapping out the data source (e.g., calling a different internal bank API or aggregating data from two microservices) by providing a Custom UseCase implementation.',
+      'It increases the APK file size fivefold to make it look more professional.',
+      'It prevents writing Unit Tests for the Presentation layer.'
     ],
     correctAnswers: [1],
     explanation: 'Nhờ kiến trúc phụ thuộc vào Interface (UseCase contract), Journey hoàn toàn không biết dữ liệu đến từ đâu. Ngân hàng có thể dùng OOTB UseCase (gọi chuẩn DBS thông qua GenClient) hoặc tự viết một Custom UseCase gọi tới API riêng của ngân hàng mà không cần đụng chạm tới một dòng code UI nào của Journey.'
@@ -266,12 +266,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khi Backbase phát hành một phiên bản Minor hoặc Patch mới cho một Journey tuân thủ Semantic Versioning (ví dụ nâng từ `5.2.0` lên `5.2.3`), điều gì được đảm bảo?',
+    question: 'When Backbase releases a new Minor or Patch version for a Journey following Semantic Versioning (e.g., upgrading from `5.2.0` to `5.2.3`), what is guaranteed?',
     options: [
-      'Toàn bộ tên các class cấu hình sẽ bị đổi tên ngẫu nhiên.',
-      'Các bản sửa lỗi (Bug fixes) và bản vá bảo mật được cập nhật mà không gây ra thay đổi phá vỡ tương thích ngược (No Breaking API Changes) đối với cấu hình hiện tại của ứng dụng.',
-      'Ứng dụng bắt buộc phải viết lại toàn bộ tầng Dependency Injection từ Koin sang Dagger 1.',
-      'Cơ sở dữ liệu trên máy người dùng sẽ bị xóa sạch mà không cần hỏi ý kiến.'
+      'All configuration class names will be randomly renamed.',
+      'Bug fixes and security patches are delivered without introducing backward-incompatible changes (No Breaking API Changes) to the application\'s existing configuration.',
+      'The application must rewrite its entire Dependency Injection layer from Koin to Dagger 1.',
+      'The local database on the user\'s device will be wiped clean without confirmation.'
     ],
     correctAnswers: [1],
     explanation: 'Backbase tuân thủ chặt chẽ Semantic Versioning (`MAJOR.MINOR.PATCH`). Các bản cập nhật `PATCH` (và `MINOR` tương thích ngược) đảm bảo các public APIs, Configuration DSL và UseCase interfaces không bị phá vỡ, giúp các ngân hàng tuân thủ triết lý Adopt có thể nâng cấp thư viện dễ dàng thông qua việc nâng version của Backbase BOM.'
@@ -281,12 +281,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Những phát biểu nào sau đây mô tả đúng về vai trò của "GenClient" trong hệ sinh thái Backbase Android? (Chọn 2 đáp án đúng)',
+    question: 'Which of the following statements accurately describe the role of a "GenClient" in the Backbase Android ecosystem? (Select 2)',
     options: [
-      'Là các thư viện Kotlin/Java client được sinh tự động (auto-generated) từ tài liệu đặc tả OpenAPI (Swagger) của các dịch vụ Digital Banking Services (DBS).',
-      'Cung cấp các phương thức gọi mạng bất đồng bộ (hỗ trợ Kotlin Coroutines `suspend` hoặc Callbacks) và các Data Models (DTOs) phản ánh chính xác hợp đồng API của backend.',
-      'Là công cụ tự động vẽ giao diện Jetpack Compose từ file ảnh chụp màn hình.',
-      'Chứa trực tiếp các đối tượng `Fragment` và `RecyclerView.Adapter` để hiển thị danh sách tài khoản.'
+      'They are Kotlin/Java client libraries auto-generated from the OpenAPI (Swagger) specifications of the Digital Banking Services (DBS).',
+      'They provide asynchronous network call methods (supporting Kotlin Coroutines `suspend` functions or Callbacks) and Data Models (DTOs) that accurately reflect the backend API contract.',
+      'They are tools that automatically generate Jetpack Compose UI from screenshot images.',
+      'They directly contain `Fragment` and `RecyclerView.Adapter` objects to display account lists.'
     ],
     correctAnswers: [0, 1],
     explanation: 'GenClients nằm ở tầng Data, được sinh tự động từ OpenAPI spec của từng dịch vụ DBS (ví dụ: `client-accounts`, `client-arrangement-manager`, `client-payment-order`). Chúng cung cấp các API class và DTO models để tầng UseCase implementation gọi xuống mạng một cách an toàn kiểu dữ liệu (type-safe).'
@@ -296,12 +296,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong trường hợp ngân hàng muốn thay đổi một chuỗi văn bản (copywriting) hoặc thêm bản dịch ngôn ngữ tiếng Việt cho một OOTB Journey trên Android, phương thức chuẩn theo tinh thần "Adopt" là gì?',
+    question: 'If a bank wants to change a text copy (copywriting) or add a Vietnamese language translation for an OOTB Journey on Android, what is the standard method following the "Adopt" principle?',
     options: [
-      'Dùng công cụ hex editor để sửa trực tiếp file `classes.dex` sau khi build APK.',
-      'Ghi đè (override) các khóa tài nguyên chuỗi (`<string name="...">`) tương ứng của Journey ngay trong file `res/values/strings.xml` hoặc `res/values-vi/strings.xml` của module ứng dụng (hoặc thông qua DeferredText trong Configuration).',
-      'Viết một AccessibilityService chạy ngầm để đọc màn hình và vẽ đè chữ tiếng Việt lên trên.',
-      'Yêu cầu người dùng cài đặt thêm phần mềm từ điển bên ngoài.'
+      'Use a hex editor tool to directly modify the `classes.dex` file after building the APK.',
+      'Override the corresponding string resource keys (`<string name="...">`) of the Journey directly inside the `res/values/strings.xml` or `res/values-vi/strings.xml` file of the application module (or via `DeferredText` in the Configuration).',
+      'Write a background `AccessibilityService` to read the screen and draw Vietnamese text on top of it.',
+      'Require users to install an external dictionary application.'
     ],
     correctAnswers: [1],
     explanation: 'Hệ thống Android Resource Merging và cơ chế `DeferredText` của Backbase cho phép ứng dụng dễ dàng ghi đè bất kỳ chuỗi văn bản nào của Journey bằng cách khai báo lại `<string name="bb_...">` trong thư mục `res/values-<locale>/strings.xml` của module `:app` hoặc truyền qua đối tượng Configuration mà không cần sửa code Journey.'
@@ -311,12 +311,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Tại sao Backbase lại tách riêng module Journey (ví dụ: `accounts-and-transactions-journey`) và module UseCase implementation mặc định (ví dụ: `accounts-and-transactions-use-case` / `arrangements-use-case`) thành các artifact độc lập?',
+    question: 'Why does Backbase separate the Journey module (e.g., `accounts-and-transactions-journey`) and the default UseCase implementation module (e.g., `accounts-and-transactions-use-case` / `arrangements-use-case`) into independent artifacts?',
     options: [
-      'Do giới hạn của Gradle không cho phép một module chứa quá 10 file Kotlin.',
-      'Để áp dụng nguyên lý Đảo ngược phụ thuộc (Dependency Inversion Principle): Journey chỉ định nghĩa các UseCase interfaces, còn module UseCase chứa phần thực thi gọi DBS GenClient. Nếu ngân hàng tự viết Custom UseCase hoàn toàn mới, họ thậm chí không cần kéo artifact UseCase mặc định vào APK.',
-      'Để bắt buộc lập trình viên phải khai báo gấp đôi số dòng trong file `settings.gradle.kts`.',
-      'Vì module Journey được viết bằng C++ còn module UseCase được viết bằng Python.'
+      'Due to a Gradle limitation that prevents a module from containing more than 10 Kotlin files.',
+      'To apply the Dependency Inversion Principle: the Journey only defines UseCase interfaces, while the UseCase module contains the implementation calling the DBS GenClient. If a bank writes a completely new Custom UseCase, they do not even need to include the default UseCase artifact in the APK.',
+      'To force developers to declare twice as many lines in the `settings.gradle.kts` file.',
+      'Because the Journey module is written in C++ while the UseCase module is written in Python.'
     ],
     correctAnswers: [1],
     explanation: 'Việc tách artifact `*-journey` (chứa UI + ViewModel + UseCase Interfaces) khỏi artifact `*-use-case` (chứa Default UseCase Implementation kết nối với DBS GenClient) giúp giảm sự phụ thuộc cứng. Ngân hàng có thể dùng bộ đôi này OOTB, hoặc giữ `*-journey` và thay thế hoàn toàn `*-use-case` bằng module tích hợp dữ liệu riêng của mình.'
@@ -326,12 +326,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khái niệm "Entitlements-driven UI" trong các Backbase Mobile Journeys mang lại trải nghiệm gì cho người dùng cuối?',
+    question: 'What end-user experience does the concept of "Entitlements-driven UI" in Backbase Mobile Journeys provide?',
     options: [
-      'Giao diện ứng dụng tự động thay đổi độ sáng màn hình theo dung lượng pin còn lại.',
-      'Các nút chức năng, tab điều hướng hoặc hạn mức giao dịch trên màn hình Journey sẽ tự động ẩn/hiện hoặc vô hiệu hóa dựa trên danh sách quyền hạn (User Permissions / Function Groups) mà backend trả về cho tài khoản đăng nhập đó.',
-      'Mọi người dùng miễn phí đều có quyền quản trị viên cao nhất trên hệ thống.',
-      'Ứng dụng tự động tải thêm quảng cáo nếu người dùng có số dư tài khoản thấp.'
+      'The application UI automatically adjusts screen brightness based on remaining battery capacity.',
+      'Action buttons, navigation tabs, or transaction limits on the Journey screen are automatically shown, hidden, or disabled based on the list of permissions (User Permissions / Function Groups) returned by the backend for that logged-in account.',
+      'Every free user is granted the highest administrator privileges on the system.',
+      'The application automatically loads additional advertisements if the user has a low account balance.'
     ],
     correctAnswers: [1],
     explanation: 'Trong ngân hàng (đặc biệt là SME/Business Banking hoặc phân quyền hộ gia đình), mỗi người dùng có quyền hạn khác nhau (ví dụ: người chỉ có quyền Xem sao kê, người có quyền Tạo lệnh chuyển tiền, người có quyền Phê duyệt). Các Backbase Journey hỗ trợ kiểm tra Entitlements để tự động điều chỉnh trạng thái hiển thị của các hành động trên UI.'
@@ -341,12 +341,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Triết lý phát triển ứng dụng di động theo chuẩn Backbase (Adopt, Extend, Build) đưa ra thứ tự ưu tiên lựa chọn giải pháp cho một yêu cầu nghiệp vụ mới như thế nào?',
+    question: 'In what priority order does the Backbase mobile development philosophy (Adopt, Extend, Build) recommend selecting a solution for a new business requirement?',
     options: [
-      'Build mới -> Extend -> Adopt.',
-      'Adopt (Sử dụng OOTB) -> Extend (Mở rộng tính năng có sẵn) -> Build (Xây dựng mới hoàn toàn).',
+      'Build from scratch -> Extend -> Adopt.',
+      'Adopt (Use OOTB) -> Extend (Enhance existing features) -> Build (Create brand-new features from scratch).',
       'Extend -> Build -> Adopt.',
-      'Tạo một module song song và viết lại toàn bộ UI.'
+      'Create a parallel module and rewrite the entire UI.'
     ],
     correctAnswers: [1],
     explanation: 'Triết lý chuẩn của Backbase là Adopt (tận dụng tối đa các Out-Of-The-Box Journeys và configurations), nếu không đáp ứng đủ mới tiến hành Extend (mở rộng UI/Logic của Journey), và cuối cùng mới Build mới khi nghiệp vụ hoàn toàn riêng biệt.'
@@ -356,12 +356,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Lợi ích cốt lõi của kiến trúc Widget/Journey-based trong Backbase Android SDK là gì?',
+    question: 'What is the core benefit of the Widget/Journey-based architecture in the Backbase Android SDK?',
     options: [
-      'Cho phép tất cả các Journey truy cập trực tiếp vào cơ sở dữ liệu của nhau.',
-      'Tăng tốc độ biên dịch bằng cách bỏ qua quá trình kiểm tra kiểu dữ liệu (Type checking).',
-      'Tách biệt các tính năng kinh doanh thành các module độc lập, tái sử dụng, dễ nâng cấp và mở rộng (Modularization).',
-      'Tự động chuyển đổi mã nguồn Kotlin sang Swift cho iOS.'
+      'Allows all Journeys to directly access each other\'s databases.',
+      'Increases compilation speed by bypassing type checking.',
+      'Decouples business features into independent, reusable, easily upgradeable, and extensible modules (Modularization).',
+      'Automatically converts Kotlin source code into Swift for iOS.'
     ],
     correctAnswers: [2],
     explanation: 'Kiến trúc Journeys/Widgets giúp đóng gói độc lập từng tính năng kinh doanh (như Accounts, Transfers, Cards). Điều này giảm tính phụ thuộc chặt chẽ (tight-coupling), hỗ trợ phát triển song song và nâng cấp phiên bản SDK dễ dàng.'
@@ -371,12 +371,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Những nguyên tắc nào dưới đây BẮT BUỘC tuân thủ khi tích hợp một Backbase Journey OOTB vào ứng dụng Integrator? (Chọn 2)',
+    question: 'Which of the following principles MUST be strictly followed when integrating an OOTB Backbase Journey into an Integrator application? (Select 2)',
     options: [
-      'Cần sửa đổi trực tiếp các file class trong file .aar của SDK để thêm tính năng.',
-      'Không được sửa đổi mã nguồn SDK có sẵn; việc tùy biến logic phải thực hiện qua cơ chế Override/Decorator hoặc Configuration.',
-      'Khóa phiên bản các Journey thông qua Backbase Bill of Materials (BOM).',
-      'Copy toàn bộ mã nguồn của Journey từ thư viện vào thư mục app để tiện quản lý.'
+      'Directly modify the class files inside the SDK .aar archive to add features.',
+      'Do not modify existing SDK source code; logic customization must be performed via Override/Decorator mechanisms or Configuration.',
+      'Lock and align Journey versions using the Backbase Bill of Materials (BOM).',
+      'Copy the entire source code of the Journey from the library into the app directory for easier management.'
     ],
     correctAnswers: [1, 2],
     explanation: 'Tuyệt đối không can thiệp trực tiếp vào mã nguồn đã đóng gói trong SDK (.aar). Việc quản lý phiên bản tập trung bắt buộc dùng Backbase BOM để đảm bảo tính tương thích giữa các module.'
@@ -386,12 +386,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khi khách hàng yêu cầu đổi tông màu chủ đạo từ xanh dương sang đỏ cho toàn bộ ứng dụng Banking, cách tiếp cận chuẩn nhất trong Backbase Mobile Design System (MDS) là gì?',
+    question: 'When a client requests changing the primary brand color from blue to red across the entire Banking application, what is the standard approach in the Backbase Mobile Design System (MDS)?',
     options: [
-      'Mở từng Layout XML trong các Journey và sửa thuộc tính android:background.',
-      'Ghi đè (Override) các Design Tokens về màu sắc (Color Tokens) tương ứng trong Theme của Integrator App.',
-      'Viết lại toàn bộ màn hình bằng Jetpack Compose.',
-      'Tạo một Activity mới có màu đỏ và khởi chạy lại app.'
+      'Open every XML Layout inside the Journeys and modify the `android:background` attribute.',
+      'Override the corresponding Color Design Tokens in the Theme of the Integrator App.',
+      'Rewrite all screens using Jetpack Compose.',
+      'Create a new red Activity and restart the app.'
     ],
     correctAnswers: [1],
     explanation: 'Backbase MDS sử dụng hệ thống Design Tokens. Để thay đổi giao diện/thương hiệu (White-labeling), chỉ cần ghi đè các token màu sắc trong styles.xml hoặc Compose Theme ở module Integrator mà không cần can thiệp UI code của các Journey.'
@@ -401,12 +401,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Trong Backbase SDK, thành phần nào chịu trách nhiệm quản lý phiên làm việc của người dùng (Session management) và cấu hình ứng dụng toàn cục?',
+    question: 'In the Backbase SDK, which component is responsible for managing user sessions (Session management) and global application configuration?',
     options: [
-      'Backbase.initialize(...) và Core SDK.',
-      'RoomDatabase.',
-      'WorkManager.',
-      'AppNavigationRouter.'
+      '`Backbase.initialize(...)` and the Core SDK.',
+      '`RoomDatabase`.',
+      '`WorkManager`.',
+      '`AppNavigationRouter`.'
     ],
     correctAnswers: [0],
     explanation: 'Backbase.initialize(context, configuration) khởi tạo Core SDK, thiết lập ngữ cảnh lưu trữ an toàn, quản lý cấu hình hệ thống và khởi động các service quản lý phiên làm việc.'
@@ -416,12 +416,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Tại sao Backbase khuyến nghị triển khai phương thức "Configuration First" trước khi thực hiện viết code tùy biến?',
+    question: 'Why does Backbase recommend adopting a "Configuration First" approach before writing custom code?',
     options: [
-      'Vì Configuration không tốn bộ nhớ RAM.',
-      'Để tận dụng tối đa tính năng có sẵn, giảm chi phí bảo trì và đảm bảo lộ trình nâng cấp (Upgrade Path) mượt mà trong tương lai.',
-      'Để tránh phải sử dụng Hilt Dependency Injection.',
-      'Để ứng dụng chạy không cần kết nối mạng.'
+      'Because Configuration consumes zero RAM memory.',
+      'To maximize the use of built-in capabilities, reduce maintenance costs, and ensure a smooth Upgrade Path in the future.',
+      'To avoid using Hilt Dependency Injection.',
+      'To allow the application to run without a network connection.'
     ],
     correctAnswers: [1],
     explanation: 'Cấu hình bằng file/provider được SDK hỗ trợ chính thức. Khi nâng cấp SDK lên bản mới, các cấu hình này giữ nguyên khả năng tương thích cao hơn rất nhiều so với việc viết code tùy biến đè lên SDK.'
@@ -431,12 +431,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Thành phần "Integrator App" trong dự án Backbase đóng vai trò gì?',
+    question: 'What role does the "Integrator App" component play in a Backbase project?',
     options: [
-      'Chứa toàn bộ logic nghiệp vụ ngân hàng cốt lõi (Core Banking).',
-      'Là module ứng dụng chính (thường là module app), kết nối các Journey độc lập, cấu hình Theme, DI Graph và điểm khởi chạy ứng dụng.',
-      'Là một server backend trung gian kết nối tới cơ sở dữ liệu.',
-      'Là công cụ tự động phát sinh file APK mà không cần Android Studio.'
+      'Contains all core banking business logic (Core Banking).',
+      'Serves as the main application module (typically the `:app` module) that wires together independent Journeys, configures the Theme, sets up the DI Graph, and provides the application entry point.',
+      'Acts as an intermediate backend server connecting to the database.',
+      'Serves as a tool that automatically generates APK files without needing Android Studio.'
     ],
     correctAnswers: [1],
     explanation: 'Integrator App đóng vai trò điểm lắp ráp (Assembly point), nơi tích hợp các module Journey, cài đặt Dependency Injection toàn cục, cấu hình theme/labels và điều hướng mức cao nhất.'
@@ -446,12 +446,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Các tính năng nào sau đây thường được quản lý ở cấp độ Core SDK của Backbase? (Chọn 2)',
+    question: 'Which of the following features are typically managed at the Backbase Core SDK level? (Select 2)',
     options: [
-      'Quản lý kết nối mạng và Token Authentication (Network Engine).',
-      'Thiết kế giao diện chi tiết cho màn hình Chuyển tiền.',
-      'Cơ chế Bảo mật, Mã hóa dữ liệu cục bộ và Security Checks.',
-      'Validate định dạng Số điện thoại riêng của từng ngân hàng địa phương.'
+      'Network connectivity management and Token Authentication (Network Engine).',
+      'Detailed UI layout design for the Fund Transfer screen.',
+      'Security mechanisms, local data encryption, and Security Checks.',
+      'Validating custom phone number formats specific to each local bank.'
     ],
     correctAnswers: [0, 2],
     explanation: 'Core SDK cung cấp các hạ tầng dùng chung như Network Engine (OkHttp, Auth, Headers) và Security Layer (Storage Encryption, Root Detection). Các màn hình và nghiệp vụ cụ thể thuộc về tầng Journey.'
@@ -461,12 +461,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Thuật ngữ "White-labeling" trong ngữ cảnh phát triển sản phẩm di động Backbase nghĩa là gì?',
+    question: 'What does the term "White-labeling" mean in the context of Backbase mobile product development?',
     options: [
-      'Việc xóa sạch toàn bộ logcat trước khi build app.',
-      'Khả năng tái sử dụng một bộ mã nguồn duy nhất để tạo ra các ứng dụng cho nhiều ngân hàng/thương hiệu khác nhau bằng cách tùy biến Theme, Assets và Config.',
-      'Việc chuyển đổi ứng dụng sang chế độ Dark Mode.',
-      'Việc sử dụng giao diện trắng đen để tiết kiệm pin.'
+      'Clearing all logcat output before building the app.',
+      'The ability to reuse a single codebase to produce applications for multiple banks/brands by customizing Themes, Assets, and Configurations.',
+      'Switching the application into Dark Mode.',
+      'Using a monochrome black-and-white interface to save battery.'
     ],
     correctAnswers: [1],
     explanation: 'White-labeling cho phép tùy biến ứng dụng chuẩn của Backbase theo diện mạo, ngôn ngữ và bộ nhận diện thương hiệu riêng của từng đối tác ngân hàng mà không phải tạo các kho mã nguồn (repository) riêng biệt.'
@@ -476,12 +476,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khái niệm "Upgrade Path" bị ảnh hưởng tiêu cực nhất bởi hành vi nào sau đây của lập trình viên?',
+    question: 'Which of the following developer actions has the most negative impact on the "Upgrade Path"?',
     options: [
-      'Thay đổi giá trị của một string key trong strings.xml.',
-      'Fork hoặc copy trực tiếp mã nguồn Journey OOTB vào dự án và chỉnh sửa nội bộ.',
-      'Đăng ký một Interceptor mới vào OkHttp Client.',
-      'Cập nhật phiên bản Backbase BOM trong file build.gradle.kts.'
+      'Changing the value of a string key in `strings.xml`.',
+      'Forking or directly copying OOTB Journey source code into the project and modifying it internally.',
+      'Registering a new Interceptor into the OkHttp Client.',
+      'Updating the Backbase BOM version in the `build.gradle.kts` file.'
     ],
     correctAnswers: [1],
     explanation: 'Việc copy/fork mã nguồn OOTB khiến bạn mất khả năng tự động cập nhật bản vá/tính năng mới khi Backbase phát hành phiên bản SDK tiếp theo, tạo ra khoản nợ kỹ thuật (Technical Debt) lớn.'
@@ -491,12 +491,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Backbase EBP giải quyết bài toán cốt lõi nào cho ngân hàng đa kênh?',
+    question: 'Which core problem does Backbase EBP solve for omni-channel banking?',
     options: [
-      'Xóa bỏ hoàn toàn Core Banking.',
-      'Thống nhất trải nghiệm số (Omni-channel) và tách lớp tương tác (Engagement Layer) khỏi các hệ thống lõi cũ kỹ.',
-      'Tự động sao lưu dữ liệu lên đám mây công cộng.',
-      'Thay thế hoàn toàn nhân viên tại quầy giao dịch.'
+      'Completely eliminates the Core Banking system.',
+      'Unifies the digital experience (Omni-channel) and decouples the Engagement Layer from legacy core systems.',
+      'Automatically backs up data to the public cloud.',
+      'Completely replaces human tellers at physical bank branches.'
     ],
     correctAnswers: [1],
     explanation: 'EBP đóng vai trò lớp trung gian thống nhất trải nghiệm khách hàng đa kênh và độc lập với Core Banking.'
@@ -506,12 +506,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Khái niệm \'Out-of-the-Box\' (OOTB) trong Backbase đảm bảo điều gì? (Chọn 2)',
+    question: 'What does the concept of \'Out-of-the-Box\' (OOTB) in Backbase guarantee? (Select 2)',
     options: [
-      'Đầy đủ tính năng nghiệp vụ ngân hàng được kiểm thử kỹ lưỡng.',
-      'Khả năng triển khai nhanh (Time-to-market) mà không cần code lại từ đầu.',
-      'Không cho phép bất kỳ tùy biến hay mở rộng nào.',
-      'Miễn trừ ngân hàng khỏi các quy định tuân thủ bảo mật địa phương.'
+      'Full-featured, thoroughly tested banking business capabilities.',
+      'Rapid deployment capability (Time-to-Market) without coding everything from scratch.',
+      'No customization or extension is permitted whatsoever.',
+      'Exempts the bank from local security compliance regulations.'
     ],
     correctAnswers: [0, 1],
     explanation: 'OOTB mang lại giải pháp nghiệp vụ chuẩn hóa, kiểm thử sẵn và triển khai nhanh chóng.'
@@ -521,7 +521,7 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Giai đoạn nào trong \'Way of Working\' tập trung vào việc đánh giá khoảng cách giữa yêu cầu khách hàng và tính năng OOTB?',
+    question: 'Which phase in the \'Way of Working\' focuses on evaluating the gap between customer requirements and OOTB capabilities?',
     options: [
       'Deploy',
       'Discover',
@@ -536,12 +536,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Tại sao việc tùy biến giao diện trong Backbase luôn ưu tiên qua Design Tokens thay vì can thiệp file layout?',
+    question: 'Why is UI customization in Backbase always prioritized through Design Tokens rather than modifying layout files?',
     options: [
-      'Tránh làm tăng kích thước APK.',
-      'Đảm bảo tính nhất quán của Design System và giữ nguyên Upgrade Path của Journey SDK.',
-      'Do Android Studio không cho phép sửa layout XML.',
-      'Để ứng dụng không cần quyền truy cập Internet.'
+      'To avoid increasing the APK size.',
+      'To ensure Design System consistency and preserve the Upgrade Path of the Journey SDK.',
+      'Because Android Studio does not allow editing XML layouts.',
+      'So the application does not require Internet access permissions.'
     ],
     correctAnswers: [1],
     explanation: 'Design Tokens tách biệt hoàn toàn nhận diện thương hiệu khỏi logic hiển thị, bảo vệ Upgrade Path.'
@@ -551,12 +551,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khái niệm \'Business Journey\' trong Backbase Android được hiểu là gì?',
+    question: 'How is the concept of a \'Business Journey\' understood in Backbase Android?',
     options: [
-      'Một module thư viện độc lập đóng gói trọn vẹn UI, Domain logic và kết nối dữ liệu cho một nghiệp vụ ngân hàng.',
-      'Một Activity duy nhất chứa toàn bộ màn hình của app.',
-      'Một tập tin JSON cấu hình API endpoint.',
-      'Một database table trong SQLite.'
+      'An independent library module that fully encapsulates UI, Domain logic, and data connectivity contracts for a specific banking business flow.',
+      'A single Activity containing all screens of the application.',
+      'A JSON file configuring API endpoints.',
+      'A database table in SQLite.'
     ],
     correctAnswers: [0],
     explanation: 'Journey là một Feature Module độc lập hoàn chỉnh theo chuẩn Clean Architecture.'
@@ -566,12 +566,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Những lợi ích chính khi sử dụng kiến trúc phân rã Journey độc lập là gì? (Chọn 2)',
+    question: 'What are the main benefits of using an independent modular Journey architecture? (Select 2)',
     options: [
-      'Các đội ngũ phát triển có thể làm việc song song trên các Journey khác nhau mà không bị xung đột code.',
-      'Dễ dàng nâng cấp hoặc thay thế từng Journey độc lập mà không ảnh hưởng tới toàn bộ ứng dụng.',
-      'Tất cả Journey đều dùng chung một ViewModel duy nhất.',
-      'Bắt buộc tất cả Journey phải biên dịch thành file APK riêng.'
+      'Development teams can work in parallel on different Journeys without code conflicts.',
+      'Individual Journeys can be easily upgraded or replaced independently without impacting the entire application.',
+      'All Journeys share a single global ViewModel.',
+      'Forces every Journey to be compiled into a separate APK file.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Phân rã Journey hỗ trợ phát triển song song (parallel development) và nâng cấp độc lập.'
@@ -581,12 +581,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khi ngân hàng yêu cầu một tính năng hoàn toàn mới chưa có trong OOTB (như Đặt vé máy bay), hướng tiếp cận chuẩn là gì?',
+    question: 'When a bank requests a completely new feature not available in OOTB (such as Flight Ticket Booking), what is the standard approach?',
     options: [
-      'Sửa trực tiếp mã nguồn của Accounts Journey.',
-      'Tiến hành Build một Custom Journey mới tuân thủ Clean Architecture và Design System của Backbase.',
-      'Từ chối yêu cầu của ngân hàng.',
-      'Viết mã trực tiếp trong file AndroidManifest.'
+      'Directly modify the source code of the Accounts Journey.',
+      'Build a new Custom Journey adhering to Backbase\'s Clean Architecture guidelines and Design System.',
+      'Reject the bank\'s requirement.',
+      'Write the code directly inside the AndroidManifest file.'
     ],
     correctAnswers: [1],
     explanation: 'Yêu cầu nghiệp vụ mới hoàn toàn nằm ngoài OOTB được xử lý bằng cách Build Custom Journey riêng.'
@@ -596,12 +596,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Backbase Mobile SDK hỗ trợ các ngôn ngữ và nền tảng native nào?',
+    question: 'Which native languages and platforms does the Backbase Mobile SDK support?',
     options: [
-      'Flutter và React Native.',
-      'Swift (iOS) và Kotlin (Android).',
-      'C# Xamarin và Ionic.',
-      'PhoneGap và Cordova.'
+      'Flutter and React Native.',
+      'Swift (iOS) and Kotlin (Android).',
+      'C# Xamarin and Ionic.',
+      'PhoneGap and Cordova.'
     ],
     correctAnswers: [1],
     explanation: 'Backbase Mobile SDK phát triển Native 100% bằng Kotlin cho Android và Swift cho iOS.'
@@ -611,12 +611,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Vai trò của Digital Banking Services (BBS/DBS) trong hệ thống Backbase là gì?',
+    question: 'What is the role of Digital Banking Services (BBS/DBS) in the Backbase system?',
     options: [
-      'Cung cấp microservices backend xử lý nghiệp vụ ngân hàng và điều phối kết nối với Core Banking.',
-      'Render giao diện trực tiếp trên điện thoại người dùng.',
-      'Đóng gói ứng dụng thành file APK.',
-      'Quản trị phân quyền trên Google Play Store.'
+      'Provide backend microservices that process banking business logic and orchestrate connectivity with Core Banking.',
+      'Render the user interface directly on the user\'s phone.',
+      'Package the application into an APK file.',
+      'Manage access permissions on the Google Play Store.'
     ],
     correctAnswers: [0],
     explanation: 'DBS/BBS là hệ thống Backend Microservices đóng vai trò trung tâm điều phối nghiệp vụ.'
@@ -626,12 +626,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'multi',
-    question: 'Điều gì xảy ra khi vi phạm nguyên tắc \'Adopt before Adapt\' bằng cách sửa mã nguồn SDK? (Chọn 2)',
+    question: 'What happens when the \'Adopt before Adapt\' principle is violated by modifying SDK source code? (Select 2)',
     options: [
-      'Gãy vỡ lộ trình nâng cấp (Upgrade Path), gây khó khăn lớn khi cập nhật các bản vá bảo mật từ Backbase.',
-      'Chi phí bảo trì mã nguồn tăng cao đột biến trong các giai đoạn tiếp theo.',
-      'Ứng dụng chạy nhanh gấp đôi trên tất cả thiết bị.',
-      'Google Play tự động cấp chứng chỉ bảo mật cao nhất.'
+      'Breaks the Upgrade Path, causing major difficulties when applying security patches from Backbase.',
+      'Drastically increases source code maintenance costs in subsequent phases.',
+      'Makes the application run twice as fast on all devices.',
+      'Google Play automatically grants the highest security certification.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Sửa mã nguồn SDK làm mất khả năng nâng cấp tự động và gây nợ kỹ thuật bảo trì khổng lồ.'
@@ -641,12 +641,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Triết lý \'Omni-channel\' của Backbase đảm bảo điều gì cho khách hàng?',
+    question: 'What does Backbase\'s \'Omni-channel\' philosophy guarantee for customers?',
     options: [
-      'Khách hàng bắt buộc phải dùng cùng lúc cả điện thoại và máy tính.',
-      'Trải nghiệm, dữ liệu và trạng thái giao dịch nhất quán xuyên suốt Mobile, Web và tại Quầy giao dịch.',
-      'Tất cả kênh giao dịch đều dùng chung một mã nguồn HTML.',
-      'Tốc độ mạng của khách hàng luôn đạt mức tối đa.'
+      'Customers are required to use both a phone and a computer simultaneously.',
+      'Consistent experience, data, and transaction state across Mobile, Web, and physical Branch channels.',
+      'All transaction channels share a single HTML codebase.',
+      'The customer\'s network speed always reaches its maximum level.'
     ],
     correctAnswers: [1],
     explanation: 'Omni-channel đảm bảo tính liền mạch và đồng bộ trạng thái giao dịch trên mọi kênh tương tác.'
@@ -656,12 +656,12 @@ export const fundamentalsQuestions: Question[] = [
     section: 'fundamentals',
     sectionName: 'Section 1: Backbase Fundamentals',
     type: 'single',
-    question: 'Khái niệm \'Integrator Module\' là gì?',
+    question: 'What is the concept of an \'Integrator Module\'?',
     options: [
-      'Mã nguồn lõi do Backbase phát hành đóng gói dưới dạng jar/aar.',
-      'Module cấp cao nhất của dự án ngân hàng, nơi lắp ráp, cấu hình theme, DI và điều hướng các Journey.',
-      'Máy chủ cơ sở dữ liệu của Core Banking.',
-      'Công cụ biên dịch mã nguồn của Gradle.'
+      'Core source code released by Backbase packaged as jar/aar files.',
+      'The top-level module of the bank\'s project where Journeys are assembled, and themes, DI, and navigation are configured.',
+      'The database server of the Core Banking system.',
+      'Gradle\'s source code compilation tool.'
     ],
     correctAnswers: [1],
     explanation: 'Integrator Module là tầng ứng dụng của khách hàng đóng vai trò kết nối và cấu hình toàn bộ hệ thống.'

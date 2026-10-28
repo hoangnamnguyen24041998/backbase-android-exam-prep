@@ -34,13 +34,13 @@ const bankStats = ExamGeneratorService.getQuestionBankStats()
 const optionLetters = ['A', 'B', 'C', 'D', 'E', 'F']
 
 // Newly added 120 questions from Google Doc have IDs:
-// fundamentals: 123..144, architecture: 225..248, setup: 317..334, adopt: 419..438, extend: 537..572
+// fundamentals: 123..144, architecture: 223..246, setup: 317..334, adopt: 419..438, extend: 538..573
 function isFromGoogleDoc(q: Question): boolean {
   if (q.section === 'fundamentals') return q.id >= 123
-  if (q.section === 'architecture') return q.id >= 225
+  if (q.section === 'architecture') return q.id >= 223
   if (q.section === 'setup') return q.id >= 317
   if (q.section === 'adopt') return q.id >= 419
-  if (q.section === 'extend') return q.id >= 537
+  if (q.section === 'extend') return q.id >= 538
   return false
 }
 

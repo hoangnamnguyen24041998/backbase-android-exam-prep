@@ -3,7 +3,7 @@ import type { Question } from '../exam.types'
 /**
  * Section 2: Mobile Essentials Android Architecture
  * Quota in Exam: 14 questions
- * Pool Size: 22 questions
+ * Pool Size: 46 questions
  */
 export const architectureQuestions: Question[] = [
   {
@@ -11,12 +11,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Theo chuẩn Clean Architecture 3 tầng của Backbase Android, nguyên tắc nghiêm ngặt nhất đối với tầng **Domain Layer** là gì?',
+    question: 'According to Backbase Android\'s 3-layer Clean Architecture standard, what is the strictest rule regarding the **Domain Layer**?',
     options: [
-      'Domain Layer phải kế thừa từ `androidx.lifecycle.AndroidViewModel` để truy cập trực tiếp `ApplicationContext`.',
-      'Domain Layer phải là một module **Pure Kotlin** (hoặc không chứa bất kỳ phụ thuộc nào vào Android Framework như `Context`, `View`, `Bundle`, cũng như không chứa các annotation của thư viện JSON Parser như Moshi `@Json` hay Retrofit).',
-      'Domain Layer chịu trách nhiệm trực tiếp khởi tạo `OkHttpClient` và quản lý kết nối SQLite thông qua Room DAO.',
-      'Domain Layer chỉ được phép chứa các file XML layout và tài nguyên hình ảnh.'
+      'The Domain Layer must inherit from `androidx.lifecycle.AndroidViewModel` to directly access the `ApplicationContext`.',
+      'The Domain Layer must be a **Pure Kotlin** module (containing no dependencies on the Android Framework such as `Context`, `View`, or `Bundle`, and no JSON parser library annotations such as Moshi `@Json` or Retrofit).',
+      'The Domain Layer is directly responsible for initializing `OkHttpClient` and managing SQLite connections via Room DAOs.',
+      'The Domain Layer is only allowed to contain XML layout files and image resources.'
     ],
     correctAnswers: [1],
     explanation: 'Trong Clean Architecture của Backbase, Domain Layer nằm ở tâm điểm (innermost layer), chứa các Business Entities/Models thuần túy và các UseCase Interfaces (hoặc Domain interactors). Nó phải là Pure Kotlin, hoàn toàn độc lập với Android SDK (`Context`, `View`) và độc lập với cơ chế Serialization/Deserialization của tầng mạng (Moshi/Gson/Kotlinx Serialization) để đảm bảo tính kiểm thử độc lập cao nhất.'
@@ -26,12 +26,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong kiến trúc đa module (Multi-module architecture) quy mô lớn của Backbase Android, việc tách một tính năng thành cặp module `:feature-api` và `:feature-impl` giải quyết bài toán kỹ thuật cốt lõi nào?',
+    question: 'In a large-scale Backbase Android multi-module architecture, what core technical problem is solved by splitting a feature into a pair of `:feature-api` and `:feature-impl` modules?',
     options: [
-      'Giúp tăng gấp đôi số lượng file APK sinh ra khi xuất bản lên Google Play.',
-      'Phá vỡ sự phụ thuộc vòng (circular dependencies) và tăng tốc độ biên dịch (Incremental Build Time) vượt trội: các module khác chỉ cần phụ thuộc vào `:feature-api` siêu nhẹ (chứa Interfaces, Models, Navigation Contracts); khi sửa code bên trong `:feature-impl`, Gradle không cần biên dịch lại các module gọi nó.',
-      'Cho phép module `:feature-api` truy cập trực tiếp vào các biến `private` của `:feature-impl`.',
-      'Bắt buộc mọi lập trình viên phải viết cùng một đoạn code ở cả hai nơi.'
+      'It doubles the number of APK files generated when publishing to Google Play.',
+      'It breaks circular dependencies and dramatically improves incremental build times: other modules only need to depend on the lightweight `:feature-api` (containing Interfaces, Models, and Navigation Contracts); when code inside `:feature-impl` is modified, Gradle does not need to recompile the modules that call it.',
+      'It allows the `:feature-api` module to directly access `private` variables inside `:feature-impl`.',
+      'It forces every developer to write the exact same code in two places.'
     ],
     correctAnswers: [1],
     explanation: 'Tách biệt `:api` (chứa public interfaces, domain models, router contracts) và `:impl` (chứa UI thực thi, ViewModel, UseCase implementations và cấu hình DI bindings) là kỹ thuật trọng tâm trong kiến trúc Android hiện đại và Backbase. Khi một thay đổi xảy ra bên trong `:feature-a:impl`, ABI (Application Binary Interface) của `:feature-a:api` không đổi, giúp Gradle tránh phải recompile hàng chục module khác đang phụ thuộc vào `:feature-a:api`.'
@@ -41,12 +41,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'multi',
-    question: 'Trong tầng **Presentation Layer** của các Backbase Android Journeys hiện đại, mô hình **Unidirectional Data Flow (UDF)** được vận hành như thế nào giữa UI (Jetpack Compose / Fragment) và `ViewModel`? (Chọn 2 đáp án đúng)',
+    question: 'In the **Presentation Layer** of modern Backbase Android Journeys, how does the **Unidirectional Data Flow (UDF)** pattern operate between the UI (Jetpack Compose / Fragment) and the `ViewModel`? (Select 2)',
     options: [
-      'Trạng thái giao diện (`UiState` - thường là các `data class` hoặc `sealed interface` bất biến / immutable) chỉ chảy theo một chiều từ `ViewModel` xuống UI thông qua `StateFlow` (hoặc `LiveData`).',
-      'Các tương tác của người dùng được đóng gói thành các sự kiện (`UiEvent` / `Intent` / Action) gửi ngược từ UI lên `ViewModel` để xử lý và cập nhật lại `UiState` mới.',
-      'Composable function hoặc Fragment tự ý sửa trực tiếp các thuộc tính `var` bên trong Domain Entity mà không thông qua `ViewModel`.',
-      '`ViewModel` giữ một tham chiếu trực tiếp (`strong reference`) tới `Activity` và `TextView` để gọi `.setText()` từ trong một `CoroutineScope(Dispatchers.IO)`.'
+      'UI State (`UiState` - typically immutable `data class` or `sealed interface` types) flows in a single direction from the `ViewModel` down to the UI via `StateFlow` (or `LiveData`).',
+      'User interactions are packaged as events (`UiEvent` / `Intent` / Action) and sent upward from the UI to the `ViewModel` to be processed and produce an updated `UiState`.',
+      'Composable functions or Fragments directly mutate `var` properties inside a Domain Entity without going through the `ViewModel`.',
+      'The `ViewModel` holds a direct `strong reference` to the `Activity` and `TextView` to call `.setText()` from within a `CoroutineScope(Dispatchers.IO)`.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Unidirectional Data Flow (UDF) đảm bảo tính nhất quán của trạng thái (Single Source of Truth): State đi xuống (ViewModel phát ra `StateFlow<UiState>` bất biến) và Events đi lên (UI gọi hàm hoặc đẩy `UiEvent` lên ViewModel). Tuyệt đối không giữ tham chiếu View/Activity trong ViewModel để tránh rò rỉ bộ nhớ (Memory Leak) khi xoay màn hình.'
@@ -56,12 +56,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong tầng **Data Layer**, trách nhiệm chuyển đổi giữa các đối tượng DTO sinh ra từ OpenAPI GenClient (hoặc Entity của Room Database) sang các đối tượng **Domain Model** thuộc về thành phần nào?',
+    question: 'In the **Data Layer**, which component is responsible for converting DTO objects generated by OpenAPI GenClient (or Room Database Entities) into **Domain Model** objects?',
     options: [
-      'Thuộc về các hàm `@Composable` ở tầng Presentation.',
-      'Thuộc về các **Mappers** nằm trong tầng Data (được gọi bởi Repository hoặc UseCase implementation) trước khi trả kết quả về cho tầng Domain/Presentation.',
-      'Thuộc về file `AndroidManifest.xml`.',
-      'Không cần chuyển đổi, tầng UI nên truyền thẳng các annotation `@JsonClass` của Moshi từ GenClient lên màn hình.'
+      'The `@Composable` functions in the Presentation layer.',
+      '**Mappers** located in the Data layer (invoked by the Repository or UseCase implementation) before returning results to the Domain/Presentation layer.',
+      'The `AndroidManifest.xml` file.',
+      'No conversion is needed; the UI layer should directly pass Moshi `@JsonClass` models from GenClient onto the screen.'
     ],
     correctAnswers: [1],
     explanation: 'Tầng Data (nơi triển khai UseCase hoặc Repository gọi xuống DBS GenClient / Room / DataStore) có trách nhiệm dùng các hàm/lớp **Mapper** (ví dụ: `ProductSummaryDto.toDomainModel()`) để ánh xạ dữ liệu thô từ mạng sang Domain Model sạch trước khi trả về cho Journey. Điều này cô lập hoàn toàn tầng UI khỏi những thay đổi cấu trúc JSON từ phía server.'
@@ -71,12 +71,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Nguyên lý **Inversion of Control (IoC)** và **Dependency Inversion Principle (DIP)** được thể hiện rõ nhất ở điểm nào trong kiến trúc của một Backbase Journey?',
+    question: 'Where are **Inversion of Control (IoC)** and the **Dependency Inversion Principle (DIP)** most clearly demonstrated in the architecture of a Backbase Journey?',
     options: [
-      'ViewModel của Journey tự khởi tạo trực tiếp đối tượng `ArrangementsApi()` bằng từ khóa `new` ngay trong khối `init {}`.',
-      'Journey định nghĩa các interface `UseCase` và `Router` mà nó cần; phần thực thi cụ thể (Concrete Implementation) của các interface này được định nghĩa ở module bên ngoài và được bơm (inject) vào Journey tại thời điểm runtime thông qua Dependency Injection (Hilt / Koin).',
-      'Mọi class trong dự án đều phải được khai báo là `object` (Singleton) toàn cục không có tham số khởi tạo.',
-      'Tầng Data import trực tiếp các Fragment của tầng Presentation để lấy dữ liệu người dùng nhập.'
+      'The Journey\'s ViewModel directly instantiates the `ArrangementsApi()` object using the `new` keyword inside its `init {}` block.',
+      'The Journey defines the `UseCase` and `Router` interfaces it requires; concrete implementations of these interfaces are defined in external modules and injected into the Journey at runtime via Dependency Injection (Hilt / Koin).',
+      'Every class in the project must be declared as a global `object` (Singleton) with no constructor parameters.',
+      'The Data layer directly imports Fragments from the Presentation layer to retrieve user input.'
     ],
     correctAnswers: [1],
     explanation: 'Đảo ngược phụ thuộc (DIP) nghĩa là module cấp cao (Journey/Domain logic) không phụ thuộc vào module cấp thấp (Data/GenClient hay App Navigation), mà cả hai cùng phụ thuộc vào Abstraction (UseCase interfaces & Router interfaces do Journey công bố). IoC container (Hilt/Koin) ở module `:app` sẽ chịu trách nhiệm nối (wire) các implementation vào interface tương ứng.'
@@ -86,12 +86,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi thiết kế `UiState` trong `ViewModel` theo chuẩn UDF cho một màn hình tải danh sách giao dịch, cách tiếp cận nào sau đây được khuyến nghị trong Kotlin để tránh các trạng thái mâu thuẫn (impossible states như vừa `isLoading = true` lại vừa `isError = true` bất hợp lý)?',
+    question: 'When designing `UiState` in a `ViewModel` following UDF standards for a transaction list screen, which approach is recommended in Kotlin to prevent impossible states (such as having both `isLoading = true` and `isError = true` simultaneously in an inconsistent way)?',
     options: [
-      'Dùng 10 biến `MutableLiveData<Boolean>` rời rạc không liên quan tới nhau.',
-      'Sử dụng `sealed interface` hoặc `sealed class` đại diện cho các trạng thái loại trừ lẫn nhau (ví dụ: `Loading`, `Success(val items: List<TransactionUiModel>)`, `Error(val message: DeferredText)`) hoặc một `data class` bất biến (`val`) được cập nhật nguyên tử qua `MutableStateFlow.update { ... }`.',
-      'Lưu trạng thái giao diện vào `SharedPreferences` mỗi mili-giây.',
-      'Dùng biến `static var` toàn cục trong `MainActivity`.'
+      'Use 10 separate, unrelated `MutableLiveData<Boolean>` variables.',
+      'Use a `sealed interface` or `sealed class` representing mutually exclusive states (e.g., `Loading`, `Success(val items: List<TransactionUiModel>)`, `Error(val message: DeferredText)`) or an immutable `data class` (`val`) updated atomically via `MutableStateFlow.update { ... }`.',
+      'Save the UI state into `SharedPreferences` every millisecond.',
+      'Use a global `static var` inside `MainActivity`.'
     ],
     correctAnswers: [1],
     explanation: 'Sử dụng `sealed interface` / `sealed class` cho các trạng thái phân tách hoàn toàn hoặc một `data class` bất biến kết hợp với hàm nguyên tử `_uiState.update { currentState -> currentState.copy(...) }` của `MutableStateFlow` giúp đảm bảo tính an toàn luồng (thread-safety) và loại bỏ hoàn toàn tình trạng race-condition khi nhiều coroutine cùng cập nhật UI.'
@@ -101,12 +101,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Để xử lý các sự kiện chỉ xảy ra một lần duy nhất (One-off / Side-effect events) như hiển thị một `Snackbar`, mở một `Dialog` cảnh báo, hoặc kích hoạt lệnh điều hướng mà không bị lặp lại khi xoay màn hình (Configuration Change), cơ chế nào phù hợp nhất trong Kotlin Coroutines / Jetpack Compose?',
+    question: 'To handle one-off / side-effect events such as showing a `Snackbar`, opening an alert `Dialog`, or triggering navigation without repeating them upon a configuration change (screen rotation), which mechanism is most appropriate in Kotlin Coroutines / Jetpack Compose?',
     options: [
-      'Lưu sự kiện vào `SharedPreferences` và đọc lại trong `onResume()`.',
-      'Sử dụng `Channel` (phơi ra ngoài dưới dạng `receiveAsFlow()`) hoặc mô hình hóa sự kiện như một phần của `UiState` kèm theo một hàm callback `onEventConsumed()` để xóa sự kiện ngay sau khi UI đã xử lý xong.',
-      'Sử dụng `StateFlow` có giá trị khởi tạo cố định và không bao giờ reset giá trị đó.',
-      'Gọi `Thread.sleep(5000)` trên Main Thread trước khi hiển thị thông báo.'
+      'Save the event into `SharedPreferences` and read it back in `onResume()`.',
+      'Use a `Channel` (exposed as `receiveAsFlow()`) or model the event as part of `UiState` accompanied by an `onEventConsumed()` callback to clear the event immediately after the UI has handled it.',
+      'Use a `StateFlow` with a fixed initial value and never reset that value.',
+      'Call `Thread.sleep(5000)` on the Main Thread before displaying the message.'
     ],
     correctAnswers: [1],
     explanation: 'Đối với các sự kiện one-off (như thông báo lỗi thoáng qua hoặc hiệu ứng phụ), nếu giữ nguyên trong `StateFlow` mà không có cơ chế tiêu thụ (consume/reset), khi người dùng xoay màn hình, UI thu thập lại `StateFlow` sẽ kích hoạt lại sự kiện đó lần nữa. Do đó, sử dụng `Channel` (`receiveAsFlow()`) hoặc pattern `State + onSink/onEventConsumed` là chuẩn mực được khuyến nghị.'
@@ -116,12 +116,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'multi',
-    question: 'Khi thu thập (collect) dữ liệu từ một `StateFlow` của `ViewModel` bên trong tầng UI (Fragment hoặc Jetpack Compose), những kỹ thuật nào sau đây đảm bảo an toàn vòng đời (Lifecycle-aware) và tránh lãng phí tài nguyên khi ứng dụng xuống nền (Background)? (Chọn 2 đáp án đúng)',
+    question: 'When collecting data from a `ViewModel`\'s `StateFlow` inside the UI layer (Fragment or Jetpack Compose), which of the following techniques ensure lifecycle-aware collection and avoid wasting resources when the app goes into the background? (Select 2)',
     options: [
-      'Trong Jetpack Compose: Sử dụng hàm mở rộng `collectAsStateWithLifecycle()` từ thư viện `androidx.lifecycle:lifecycle-runtime-compose`.',
-      'Trong Fragment (View System): Sử dụng `viewLifecycleOwner.lifecycleScope.launch { viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { viewModel.uiState.collect { ... } } }`.',
-      'Sử dụng `GlobalScope.launch(Dispatchers.Main) { viewModel.uiState.collect { ... } }` ngay trong hàm `onCreate()` của Activity.',
-      'Dùng vòng lặp `while (true)` trên luồng UI để kiểm tra giá trị của biến mỗi 10ms.'
+      'In Jetpack Compose: Use the `collectAsStateWithLifecycle()` extension function from the `androidx.lifecycle:lifecycle-runtime-compose` library.',
+      'In a Fragment (View System): Use `viewLifecycleOwner.lifecycleScope.launch { viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { viewModel.uiState.collect { ... } } }`.',
+      'Use `GlobalScope.launch(Dispatchers.Main) { viewModel.uiState.collect { ... } }` directly inside the Activity\'s `onCreate()` method.',
+      'Use a `while (true)` loop on the UI thread to poll the variable\'s value every 10ms.'
     ],
     correctAnswers: [0, 1],
     explanation: '`collectAsStateWithLifecycle()` trong Compose và `viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED)` trong Fragment đảm bảo rằng quá trình thu thập Flow chỉ hoạt động khi giao diện thực sự hiển thị trên màn hình (ít nhất ở trạng thái `STARTED`), và tự động hủy thu thập khi app xuống background (`STOPPED`), chống rò rỉ bộ nhớ và tiết kiệm pin/CPU.'
@@ -131,12 +131,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong thực hành tốt nhất về Kotlin Coroutines ở tầng Data và Domain của Backbase, việc chuyển đổi ngữ cảnh luồng thực thi (Threading / Dispatchers) nên được thiết kế như thế nào để phục vụ kiểm thử (Testability) tốt nhất?',
+    question: 'According to Kotlin Coroutines best practices in Backbase\'s Data and Domain layers, how should threading and dispatcher switching be designed to maximize testability?',
     options: [
-      'Viết cứng (hardcode) `withContext(Dispatchers.IO)` ở khắp mọi nơi mà không cho phép truyền vào từ bên ngoài.',
-      'Tiêm (Inject) các `CoroutineDispatcher` (ví dụ thông qua các Qualifier như `@IoDispatcher`, `@DefaultDispatcher`) vào constructor của Repository/UseCase implementation để trong Unit Test có thể dễ dàng thay thế bằng `StandardTestDispatcher` hoặc `UnconfinedTestDispatcher`.',
-      'Luôn chạy mọi tác vụ đọc ghi cơ sở dữ liệu và giải mã JSON nặng trên `Dispatchers.Main`.',
-      'Tạo mới một `Executors.newFixedThreadPool(100)` mỗi khi người dùng bấm nút.'
+      'Hardcode `withContext(Dispatchers.IO)` everywhere without allowing external injection.',
+      'Inject `CoroutineDispatcher` instances (for example, via qualifiers such as `@IoDispatcher` and `@DefaultDispatcher`) into the constructor of the Repository/UseCase implementation so they can easily be replaced with `StandardTestDispatcher` or `UnconfinedTestDispatcher` in unit tests.',
+      'Always run all database read/write operations and heavy JSON parsing on `Dispatchers.Main`.',
+      'Create a new `Executors.newFixedThreadPool(100)` every time the user taps a button.'
     ],
     correctAnswers: [1],
     explanation: 'Quy tắc vàng của Coroutines là "Inject Dispatchers": không bao giờ hardcode `Dispatchers.IO` hay `Dispatchers.Default` bên trong class nghiệp vụ. Việc inject `CoroutineDispatcher` qua constructor (với Hilt/Koin) giúp các bài kiểm thử đơn vị (Unit Tests) truyền `TestDispatcher` vào, giúp test chạy tức thì, tất định (deterministic) mà không bị phụ thuộc vào luồng nền thực tế.'
@@ -146,12 +146,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong tầng Data của một ứng dụng Android tích hợp Backbase, khi cần lưu trữ bộ nhớ đệm (Local Caching) có cấu trúc quan hệ phức tạp hoặc cấu hình nhẹ theo cặp khóa-giá trị (Key-Value), bộ đôi công nghệ Jetpack nào được khuyến nghị sử dụng?',
+    question: 'In the Data layer of a Backbase-integrated Android application, when local caching is required for complex relational data or lightweight key-value configuration, which pair of Jetpack/Backbase technologies is recommended?',
     options: [
-      'Lưu file văn bản thuần `.txt` ra thẻ nhớ ngoài (External SD Card) không mã hóa.',
-      'Sử dụng **Room Database** (kết hợp SQLCipher nếu chứa dữ liệu nhạy cảm) cho dữ liệu có cấu trúc/quan hệ và **Jetpack DataStore** (hoặc Backbase `EncryptedStorage` / `SecureStorage`) cho dữ liệu cấu hình Key-Value bất đồng bộ an toàn.',
-      'Sử dụng biến `static HashMap` lưu trên RAM để dữ liệu tồn tại vĩnh viễn sau khi tắt nguồn điện thoại.',
-      'Sử dụng `SharedPreferences.commit()` đồng bộ ngay trên luồng vẽ giao diện (UI Thread) cho các file dung lượng 50MB.'
+      'Save unencrypted plain `.txt` files to an external SD card.',
+      'Use **Room Database** (combined with SQLCipher if storing sensitive data) for structured/relational data and **Jetpack DataStore** (or Backbase `EncryptedStorage` / `SecureStorage`) for safe, asynchronous key-value configuration data.',
+      'Use a `static HashMap` stored in RAM so data persists permanently after the phone is powered off.',
+      'Use synchronous `SharedPreferences.commit()` directly on the UI Thread for 50MB files.'
     ],
     correctAnswers: [1],
     explanation: 'Room cung cấp lớp trừu tượng kiểm tra truy vấn SQL ngay lúc biên dịch (compile-time verification) và trả về `Flow<T>` phản ứng mượt mà. Đối với dữ liệu Key-Value, Jetpack DataStore (hoặc Backbase SecureStorage đối với dữ liệu nhạy cảm ngân hàng) khắc phục hoàn toàn nhược điểm chặn luồng UI (ANR) và thiếu an toàn của `SharedPreferences` cũ.'
@@ -161,12 +161,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Cách biểu diễn kết quả trả về từ một hàm `suspend` trong `UseCase` của Backbase (ví dụ `CallResult<T>` hoặc `Result<T, E>`) mang lại lợi thế gì so với việc chỉ ném ra ngoại lệ không kiểm soát (Unchecked Exceptions)?',
+    question: 'What advantage does representing the return value of a `suspend` function in a Backbase `UseCase` as a result wrapper (such as `CallResult<T>` or `Result<T, E>`) offer compared to throwing unchecked exceptions?',
     options: [
-      'Buộc tầng gọi (như `ViewModel`) phải xử lý tường minh cả nhánh thành công (`Success`) lẫn nhánh thất bại (`Error / Failure`) thông qua biểu thức `when` vét cạn (exhaustive), tránh hiện tượng ứng dụng bị văng (Crash - `UncaughtExceptionHandler`) khi mất mạng hoặc lỗi 500 từ server.',
-      'Làm cho trình biên dịch bỏ qua mọi lỗi cú pháp trong file Kotlin.',
-      'Tự động sửa lỗi mạng Wi-Fi cho điện thoại của khách hàng.',
-      'Giúp hàm không cần từ khóa `suspend` mà vẫn tạm dừng được.'
+      'It forces the caller (such as a `ViewModel`) to explicitly handle both the `Success` branch and the `Error / Failure` branch via an exhaustive `when` expression, preventing the app from crashing (`UncaughtExceptionHandler`) during network loss or HTTP 500 server errors.',
+      'It makes the compiler ignore all syntax errors in the Kotlin file.',
+      'It automatically fixes Wi-Fi network issues on the customer\'s phone.',
+      'It allows the function to suspend without needing the `suspend` keyword.'
     ],
     correctAnswers: [0],
     explanation: 'Trong Kotlin, các hàm không có khai báo Checked Exceptions. Nếu một UseCase ném thẳng exception khi gọi mạng thất bại mà ViewModel quên bọc `try/catch`, coroutine sẽ bị hủy và có thể làm crash toàn bộ ứng dụng. Do đó, Backbase sử dụng kiểu bọc kết quả (như `Result` hoặc `Response`/`CallResult` dạng `sealed class`) để ép buộc người lập trình phải xử lý cả 2 trường hợp `Success` và `Error` một cách an toàn.'
@@ -176,12 +176,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'multi',
-    question: 'Chiều hướng phụ thuộc (Dependency Rule) giữa 3 tầng trong Clean Architecture được quy định như thế nào? (Chọn 2 đáp án đúng)',
+    question: 'How is the Dependency Rule defined across the 3 layers of Clean Architecture? (Select 2)',
     options: [
-      'Tầng **Presentation** và tầng **Data** đều phụ thuộc hướng vào trong tới tầng **Domain** (cả hai đều biết tới Domain Models và UseCase Interfaces).',
-      'Tầng **Domain** hoàn toàn độc lập, KHÔNG ĐƯỢC PHÉP biết hay import bất cứ class nào từ tầng **Presentation** hoặc tầng **Data**.',
-      'Tầng **Domain** phụ thuộc trực tiếp vào tầng **Data** để gọi các hàm của Retrofit/GenClient.',
-      'Tầng **Data** phụ thuộc trực tiếp vào tầng **Presentation** để hiển thị Toast thông báo lỗi.'
+      'Both the **Presentation** layer and the **Data** layer depend inward on the **Domain** layer (both are aware of Domain Models and UseCase Interfaces).',
+      'The **Domain** layer is completely independent and MUST NOT know about or import any classes from the **Presentation** or **Data** layers.',
+      'The **Domain** layer depends directly on the **Data** layer to invoke Retrofit/GenClient methods.',
+      'The **Data** layer depends directly on the **Presentation** layer to display error Toast messages.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Theo Dependency Rule của Clean Architecture: Mũi tên phụ thuộc mã nguồn chỉ được phép hướng vào bên trong về phía tầng có mức độ trừu tượng cao nhất là **Domain**. Presentation -> Domain <- Data (nhờ Dependency Inversion, Data implements các interface nằm trong Domain).'
@@ -191,12 +191,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong file `build.gradle.kts` của một module thư viện (ví dụ `:accounts-journey`), sự khác biệt cốt lõi giữa việc khai báo một phụ thuộc bằng từ khóa `api(...)` và `implementation(...)` là gì?',
+    question: 'In the `build.gradle.kts` file of a library module (e.g., `:accounts-journey`), what is the core difference between declaring a dependency with `api(...)` versus `implementation(...)`?',
     options: [
-      '`api` chỉ dùng cho các thư viện viết bằng Java, còn `implementation` chỉ dùng cho thư viện viết bằng Kotlin.',
-      '`api(...)` làm lộ (expose) thư viện phụ thuộc đó ra đường dẫn biên dịch (compile classpath) của mọi module cấp trên phụ thuộc vào `:accounts-journey`; trong khi `implementation(...)` giữ kín phụ thuộc đó ở nội bộ, giúp giảm thời gian recompile và tránh rò rỉ chi tiết thực thi.',
-      '`implementation` tải thư viện từ Internet mỗi khi người dùng mở ứng dụng trên điện thoại.',
-      'Hai từ khóa này hoàn toàn giống hệt nhau trong Gradle 8.x.'
+      '`api` is only used for libraries written in Java, whereas `implementation` is only used for libraries written in Kotlin.',
+      '`api(...)` transitively exposes that dependency to the compile classpath of every upstream module that depends on `:accounts-journey`; whereas `implementation(...)` keeps the dependency internal, reducing recompilation times and preventing implementation detail leakage.',
+      '`implementation` downloads the library from the Internet every time the user opens the app on their phone.',
+      'The two keywords are completely identical in Gradle 8.x.'
     ],
     correctAnswers: [1],
     explanation: 'Khi dùng `implementation`, nếu thư viện nội bộ đó thay đổi phiên bản hoặc API, chỉ duy nhất module trực tiếp chứa nó phải biên dịch lại. Ngược lại, dùng `api` sẽ đẩy phụ thuộc đó sang tất cả các module tiêu thụ (transitive dependency), làm phình to compile classpath và khiến toàn bộ cây module phải biên dịch lại dây chuyền.'
@@ -206,12 +206,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi cấu hình `StateFlow` trong `ViewModel` bằng toán tử `.stateIn(...)` để chuyển đổi từ một `Flow` lạnh (cold flow) sang `StateFlow` nóng (hot flow), việc truyền tham số `SharingStarted.WhileSubscribed(5000)` có tác dụng kỹ thuật gì?',
+    question: 'When configuring a `StateFlow` in a `ViewModel` using the `.stateIn(...)` operator to convert a cold `Flow` into a hot `StateFlow`, what is the technical purpose of passing `SharingStarted.WhileSubscribed(5000)`?',
     options: [
-      'Tắt màn hình điện thoại của người dùng sau đúng 5000 mili-giây.',
-      'Giữ cho luồng dữ liệu nguồn (upstream flow) tiếp tục sống thêm 5 giây sau khi UI tạm thời hủy đăng ký (ví dụ khi xoay màn hình làm Activity/Fragment tái tạo trong vài trăm ms) để không phải khởi chạy lại truy vấn mạng/DB tốn kém; nhưng sẽ dừng hẳn nếu người dùng thực sự thoát ứng dụng ra màn hình chính quá 5 giây.',
-      'Giới hạn số lượng phần tử tối đa trong danh sách chỉ được 5000 mục.',
-      'Trì hoãn việc hiển thị giao diện 5 giây kể từ lúc người dùng chạm vào biểu tượng ứng dụng.'
+      'It turns off the user\'s phone screen after exactly 5000 milliseconds.',
+      'It keeps the upstream flow alive for an additional 5 seconds after the UI temporarily unsubscribes (e.g., during a screen rotation when the Activity/Fragment is recreated within a few hundred ms) to avoid restarting expensive network/DB queries; yet stops it completely if the user leaves the app to the home screen for more than 5 seconds.',
+      'It limits the maximum number of items in a list to 5000 entries.',
+      'It delays rendering the UI for 5 seconds after the user taps the app icon.'
     ],
     correctAnswers: [1],
     explanation: '`SharingStarted.WhileSubscribed(5000)` là cấu hình tiêu chuẩn do đội ngũ Android Architecture khuyến nghị: khoảng đệm 5000ms (5 giây) đủ dài để vượt qua quá trình hủy và tạo lại View khi xoay màn hình (Configuration Change) mà không làm đứt quãng upstream flow, nhưng đủ ngắn để giải phóng tài nguyên ngay khi người dùng nhấn nút Home chuyển app xuống nền.'
@@ -221,12 +221,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong Jetpack Compose được sử dụng ở tầng Presentation của các Journey mới, khái niệm **State Hoisting** (Nâng trạng thái lên trên) mang lại lợi ích kiến trúc nào?',
+    question: 'In Jetpack Compose used in the Presentation layer of modern Journeys, what architectural benefit does **State Hoisting** provide?',
     options: [
-      'Biến các Composable cấp thấp thành **Stateless Composables** (chỉ nhận vào dữ liệu `state: T` và các hàm callback `onAction: () -> Unit`), giúp chúng dễ dàng tái sử dụng ở nhiều màn hình, dễ tạo `@Preview` và dễ viết UI Test độc lập mà không cần khởi tạo `ViewModel`.',
-      'Tự động đẩy toàn bộ biến cục bộ của hàm Composable lên máy chủ đám mây.',
-      'Cho phép một Composable con truy cập và thay đổi trực tiếp các biến `private` của Composable cha mà không cần truyền qua tham số.',
-      'Loại bỏ hoàn toàn nhu cầu sử dụng hàm `remember` trong toàn bộ ứng dụng.'
+      'It turns lower-level Composables into **Stateless Composables** (accepting only `state: T` data and `onAction: () -> Unit` callbacks), making them easy to reuse across screens, easy to render in `@Preview`, and easy to UI-test in isolation without instantiating a `ViewModel`.',
+      'It automatically pushes all local variables of a Composable function to a cloud server.',
+      'It allows a child Composable to directly access and mutate `private` variables of its parent Composable without passing parameters.',
+      'It completely eliminates the need to use the `remember` function across the entire application.'
     ],
     correctAnswers: [0],
     explanation: 'State Hoisting là mẫu thiết kế tách trạng thái ra khỏi Composable hiển thị bằng cách thay thế biến trạng thái nội bộ bằng 2 tham số: `value: T` (giá trị hiện tại cần hiển thị) và `onValueChange: (T) -> Unit` (sự kiện yêu cầu thay đổi giá trị). Nhờ đó, Screen-level Composable kết nối với ViewModel, còn toàn bộ cây UI bên dưới là Stateless, cực kỳ dễ preview và test.'
@@ -236,12 +236,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Tại sao trình biên dịch Jetpack Compose lại quan tâm đặc biệt đến tính **Stability / Immutability** (Tính ổn định / Bất biến) của các class được truyền làm tham số cho một `@Composable` function?',
+    question: 'Why does the Jetpack Compose compiler care specifically about the **Stability / Immutability** of classes passed as parameters to a `@Composable` function?',
     options: [
-      'Vì nếu tham số truyền vào được đánh giá là **Stable / Immutable** (ví dụ `data class` chỉ chứa các thuộc tính `val` kiểu nguyên thủy hoặc được gắn `@Immutable` / dùng `ImmutableList`), Compose Runtime có thể kích hoạt cơ chế **Smart Recomposition** để bỏ qua (skip) việc vẽ lại các Composable không có dữ liệu thay đổi, giúp giao diện cuộn mượt 60/120fps.',
-      'Vì hệ điều hành Android cấm truyền các `class` thông thường vào hàm.',
-      'Để tự động mã hóa các đối tượng đó trước khi lưu vào ổ cứng.',
-      'Vì nếu dùng biến `var`, ứng dụng sẽ không thể cài đặt lên các thiết bị Samsung.'
+      'Because if the input parameters are determined to be **Stable / Immutable** (e.g., a `data class` containing only primitive `val` properties, annotated with `@Immutable`, or using `ImmutableList`), the Compose Runtime can trigger **Smart Recomposition** to skip recomposing Composables whose data has not changed, keeping scrolling smooth at 60/120fps.',
+      'Because the Android OS forbids passing regular `class` instances into functions.',
+      'To automatically encrypt those objects before saving them to disk.',
+      'Because if `var` properties are used, the app cannot be installed on Samsung devices.'
     ],
     correctAnswers: [0],
     explanation: 'Nếu một class trong `UiState` chứa thuộc tính `var` hoặc chứa `java.util.List` (vốn chỉ là interface, bên dưới có thể là `ArrayList` khả biến) và class đó đến từ một module bên ngoài không bật Compose Compiler (như module `:domain`), Compose sẽ coi nó là **Unstable** và buộc phải recompose lại toàn bộ nhánh UI mỗi lần state phát ra. Giữ `UiState` thực sự bất biến (`@Immutable` / `PersistentList`) là chìa khóa tối ưu hiệu năng Compose.'
@@ -251,12 +251,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'multi',
-    question: 'Trong thiết kế kiến trúc của Backbase, làm thế nào để hai Journey độc lập (ví dụ: `AccountsJourney` và `PaymentWizardJourney`) có thể trao đổi thông tin hoặc chuyển hướng sang nhau mà KHÔNG tạo ra sự phụ thuộc trực tiếp (Zero Direct Dependency) giữa hai module Journey đó? (Chọn 2 đáp án đúng)',
+    question: 'In Backbase\'s architectural design, how can two independent Journeys (for example, `AccountsJourney` and `PaymentWizardJourney`) exchange information or navigate to one another with **Zero Direct Dependency** between the two Journey modules? (Select 2)',
     options: [
-      '`AccountsJourney` chỉ định nghĩa một interface điều hướng trừu tượng (ví dụ: `AccountsRouter` với hàm `onMakePaymentClicked(accountId: String)`) và phát tín hiệu qua interface này.',
-      'Module cấp cao (như `:app` hoặc `:navigation` module - nơi nhìn thấy cả 2 Journey) sẽ viết class triển khai (implement) interface `AccountsRouter` đó để thực hiện lệnh điều hướng mở `PaymentWizardJourney` kèm theo tham số `accountId`.',
-      '`AccountsJourney` khai báo trực tiếp `implementation(project(":payment-wizard-journey"))` trong `build.gradle.kts` của nó và gọi thẳng `startActivity()`.',
-      'Hai Journey giao tiếp với nhau bằng cách ghi đè vào một file văn bản trong thư mục `/sdcard/Download`.'
+      '`AccountsJourney` defines an abstract navigation interface (for example, `AccountsRouter` with a method `onMakePaymentClicked(accountId: String)`) and emits navigation requests through this interface.',
+      'A higher-level module (such as `:app` or a `:navigation` module that has visibility into both Journeys) implements the `AccountsRouter` interface to perform the navigation action that opens `PaymentWizardJourney` with the `accountId` parameter.',
+      '`AccountsJourney` directly declares `implementation(project(":payment-wizard-journey"))` in its `build.gradle.kts` and calls `startActivity()` directly.',
+      'The two Journeys communicate by overwriting a text file in the `/sdcard/Download` folder.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Đây là nguyên tắc vàng trong kiến trúc điều hướng của Backbase: Các Journey là các hòn đảo độc lập (Isolated Islands), tuyệt đối không biết sự tồn tại của nhau. Mọi nhu cầu thoát ra khỏi một Journey hoặc nhảy sang Journey khác đều được định nghĩa qua một **Router / Exit Interface** đặt tại Journey nguồn, và được hiện thực hóa (implemented) tại tầng Host Application (`:app`).'
@@ -266,12 +266,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong Kotlin Coroutines, khái niệm **Structured Concurrency** (Đồng thời có cấu trúc) khi sử dụng `viewModelScope` trong `ViewModel` đảm bảo hành vi quan trọng nào?',
+    question: 'In Kotlin Coroutines, what critical behavior does **Structured Concurrency** guarantee when using `viewModelScope` inside a `ViewModel`?',
     options: [
-      'Khi `ViewModel` bị hủy (`onCleared()` được gọi khi người dùng thoát hẳn khỏi luồng màn hình/Journey), toàn bộ các Coroutine con được khởi chạy bên trong `viewModelScope` sẽ tự động bị hủy (`CancellationException`) ngay lập tức, ngăn chặn việc gọi mạng thừa và rò rỉ tài nguyên.',
-      'Các Coroutine bên trong `viewModelScope` sẽ tiếp tục chạy ngầm vĩnh viễn ngay cả khi người dùng đã đóng ứng dụng.',
-      'Mọi hàm bên trong `viewModelScope` đều bị ép chạy tuần tự từng dòng trên một luồng duy nhất của CPU.',
-      '`viewModelScope` tự động bắt và nuốt trọn mọi lỗi `OutOfMemoryError` của hệ thống.'
+      'When the `ViewModel` is cleared (`onCleared()` is called when the user completely exits the screen/Journey flow), all child coroutines launched within `viewModelScope` are automatically cancelled (`CancellationException`) immediately, preventing redundant network calls and resource leaks.',
+      'Coroutines inside `viewModelScope` continue running in the background indefinitely even after the user closes the application.',
+      'Every function inside `viewModelScope` is forced to run sequentially line-by-line on a single CPU thread.',
+      '`viewModelScope` automatically catches and swallows all system `OutOfMemoryError` crashes.'
     ],
     correctAnswers: [0],
     explanation: 'Structured Concurrency gắn vòng đời của các tác vụ bất đồng bộ vào một `CoroutineScope` có giới hạn rõ ràng. `viewModelScope` được gắn chặt với vòng đời của `ViewModel`; ngay khi `ViewModel.onCleared()` kích hoạt, `Job` gốc của `viewModelScope` bị cancel, kéo theo toàn bộ các request mạng hoặc luồng xử lý con bên trong dừng lại an toàn.'
@@ -281,12 +281,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Giả sử trong một màn hình Dashboard ngân hàng, `ViewModel` cần gọi đồng thời 2 UseCase độc lập: `getAccountsSummary()` và `getRecentNotifications()`.Nếu muốn cả 2 chạy song song (parallel) và nếu 1 trong 2 gặp lỗi thì nhánh còn lại vẫn tiếp tục hoàn thành để hiển thị một phần dữ liệu (Partial Success UI), cấu trúc Coroutine nào phù hợp nhất?',
+    question: 'Suppose on a banking Dashboard screen, a `ViewModel` needs to concurrently invoke two independent UseCases: `getAccountsSummary()` and `getRecentNotifications()`. If both should run in parallel and a failure in one should allow the other to complete and render partial data (Partial Success UI), which Coroutine construct is most appropriate?',
     options: [
-      'Sử dụng `supervisorScope { val accountsDeferred = async { ... }; val notificationsDeferred = async { ... } }` kết hợp xử lý kết quả/ngoại lệ riêng biệt cho từng `Deferred`.',
-      'Sử dụng `coroutineScope { ... }` thông thường mà không bắt lỗi vì khi 1 `async` con ném lỗi, nó sẽ không ảnh hưởng gì tới `async` còn lại.',
-      'Gọi tuần tự từng hàm một cách nhau bởi `delay(10000)`.',
-      'Tạo 2 `Activity` riêng biệt chạy đè lên nhau trên màn hình.'
+      'Use `supervisorScope { val accountsDeferred = async { ... }; val notificationsDeferred = async { ... } }` combined with separate result/exception handling for each `Deferred`.',
+      'Use a regular `coroutineScope { ... }` without exception handling because when one child `async` throws an exception, it will not affect the other `async`.',
+      'Call each function sequentially separated by `delay(10000)`.',
+      'Create 2 separate `Activity` instances running on top of each other on the screen.'
     ],
     correctAnswers: [0],
     explanation: 'Trong một `coroutineScope` thông thường, nếu một coroutine con (`async` / `launch`) thất bại với ngoại lệ chưa bắt, nó sẽ hủy ngay lập tức coroutine cha và toàn bộ các coroutine anh em khác. Ngược lại, `supervisorScope` sử dụng `SupervisorJob`, cho phép các nhánh con thất bại độc lập mà không làm sập nhánh `async` đang chạy song song còn lại.'
@@ -296,12 +296,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Tại sao trong các Domain Models hoặc Configuration Models của Backbase, các chuỗi văn bản hiển thị lên giao diện thường được khai báo bằng kiểu `DeferredText` (hoặc tương tự trong MDS như `DeferredDrawable`, `DeferredColor`) thay vì kiểu `String` hoặc `@StringRes Int` thuần túy?',
+    question: 'Why are UI display strings in Backbase Domain Models or Configuration Models typically declared as `DeferredText` (or similar MDS types like `DeferredDrawable` and `DeferredColor`) rather than plain `String` or `@StringRes Int`?',
     options: [
-      'Vì kiểu `String` của Kotlin không hỗ trợ bảng mã Unicode tiếng Việt.',
-      '`DeferredText` là một lớp trừu tượng hóa thông minh cho phép bọc cả một chuỗi tĩnh (`DeferredText.Constant("...")`), một ID tài nguyên (`DeferredText.Resource(R.string.xxx)`) hoặc chuỗi có tham số định dạng mà KHÔNG cần truyền `Context` vào tầng Domain/ViewModel; việc phân giải ra `CharSequence` thực tế chỉ diễn ra ở bước cuối cùng trên tầng UI nơi có sẵn `Context`.',
-      'Để làm cho việc đọc giá trị chuỗi chậm hơn 10 lần nhằm kiểm tra tốc độ máy.',
-      'Vì Google đã loại bỏ kiểu dữ liệu `String` khỏi Android SDK từ phiên bản API 34.'
+      'Because Kotlin\'s `String` type does not support Vietnamese Unicode characters.',
+      '`DeferredText` is a smart abstraction that can wrap a static string (`DeferredText.Constant("...")`), a resource ID (`DeferredText.Resource(R.string.xxx)`), or a formatted string with arguments WITHOUT passing `Context` into the Domain/ViewModel layer; resolution into an actual `CharSequence` happens only at the final step in the UI layer where `Context` is available.',
+      'To make reading string values 10 times slower for device performance benchmarking.',
+      'Because Google removed the `String` data type from the Android SDK starting in API 34.'
     ],
     correctAnswers: [1],
     explanation: '`DeferredText` (cùng họ `DeferredResources` của Backbase) giải quyết triệt để bài toán giữ cho `ViewModel`, `Configuration` và `Domain` hoàn toàn sạch bóng `android.content.Context`. Lập trình viên có thể truyền cả `R.string.title` lẫn chuỗi động từ API dưới cùng một kiểu dữ liệu thống nhất là `DeferredText`, và chỉ gọi `.resolve(context)` khi render lên View/Composable.'
@@ -311,12 +311,12 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi thiết kế Navigation Graph cho một Journey phức tạp gồm nhiều màn hình con (ví dụ: luồng Chuyển tiền gồm Nhập thông tin -> Xem lại -> Xác thực OTP -> Kết quả), phạm vi vòng đời của `ViewModel` chia sẻ dữ liệu chung giữa các bước trong luồng đó nên được đặt ở đâu?',
+    question: 'When designing a Navigation Graph for a complex multi-screen Journey (for example, a Transfer flow consisting of Enter Details -> Review -> OTP Verification -> Receipt), how should the lifecycle scope of a shared `ViewModel` holding common step data be configured?',
     options: [
-      'Đặt ở cấp độ `Application` Singleton để dữ liệu chuyển tiền không bao giờ bị xóa ngay cả khi đã đăng xuất.',
-      'Gắn (Scope) vào **Nested Navigation Graph** của chính Journey đó (NavGraph-scoped ViewModel): dữ liệu được chia sẻ xuyên suốt giữa các màn hình con trong luồng và tự động được giải phóng sạch sẽ ngay khi người dùng hoàn tất hoặc thoát khỏi Nested NavGraph của Journey đó.',
-      'Tạo một `ViewModel` mới hoàn toàn ở mỗi màn hình và truyền dữ liệu qua lại bằng cách ghi ra file tạm trên ổ cứng.',
-      'Lưu toàn bộ thông tin giao dịch nhạy cảm vào Clipboard (Bộ nhớ tạm sao chép) của điện thoại.'
+      'Scope it to the `Application` Singleton so transfer data is never cleared even after logging out.',
+      'Scope it to the **Nested Navigation Graph** of that specific Journey (NavGraph-scoped ViewModel): data is shared across all sub-screens in the flow and is automatically cleared as soon as the user completes or exits the Journey\'s Nested NavGraph.',
+      'Create a completely new `ViewModel` on every screen and pass data back and forth by writing temporary files to disk.',
+      'Store all sensitive transaction details in the phone\'s system Clipboard.'
     ],
     correctAnswers: [1],
     explanation: 'Trong Jetpack Navigation (cả Fragment lẫn Compose Navigation), việc scope một Shared ViewModel vào `NavBackStackEntry` của Nested Navigation Graph đại diện cho Journey là kiến trúc chuẩn mực nhất: các màn hình bước 1, 2, 3 truy cập chung một instance ViewModel, và khi Nested Graph bị pop khỏi BackStack, ViewModel đó sẽ tự động gọi `onCleared()`.'
@@ -326,82 +326,82 @@ export const architectureQuestions: Question[] = [
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong tầng Data, khi sử dụng thư viện Moshi hoặc Kotlinx Serialization cùng với OpenAPI GenClient để giải mã (deserialize) phản hồi JSON từ Digital Banking Services, việc cấu hình chế độ bỏ qua các trường lạ (`ignoreUnknownKeys = true` / fallback enum) quan trọng như thế nào đối với tính tương thích xuôi (Forward Compatibility)?',
+    question: 'In the Data layer, when using Moshi or Kotlinx Serialization alongside OpenAPI GenClient to deserialize JSON responses from Digital Banking Services, why is configuring the parser to ignore unknown fields (`ignoreUnknownKeys = true` / enum fallbacks) critical for **Forward Compatibility**?',
     options: [
-      'Không có tác dụng gì vì server không bao giờ thay đổi.',
-      'Đảm bảo khi phía Backend (DBS) nâng cấp và bổ sung thêm các trường JSON mới hoặc thêm giá trị Enum mới trong tương lai, các phiên bản ứng dụng Android cũ đang chạy ngoài thị trường không bị văng lỗi `JsonDataException` / `SerializationException`.',
-      'Giúp giảm dung lượng gói tin truyền qua mạng xuống bằng 0 byte.',
-      'Tự động dịch tên biến từ tiếng Anh sang tiếng Pháp.'
+      'It has no effect because the backend server never changes.',
+      'It ensures that when the Backend (DBS) is upgraded and introduces new JSON fields or new Enum values in the future, older Android app versions already running in production will not crash with a `JsonDataException` / `SerializationException`.',
+      'It reduces the size of network packets to 0 bytes.',
+      'It automatically translates variable names from English to French.'
     ],
     correctAnswers: [1],
     explanation: 'Trong môi trường Mobile Banking thực tế, không phải người dùng nào cũng cập nhật ứng dụng ngay lập tức khi Backend triển khai bản mới. Cấu hình parser khoan dung với các trường chưa biết (`ignoreUnknownKeys`) và xử lý giá trị mặc định cho các Enum lạ (`@Fallback` / unknown enum value) là nguyên tắc sống còn để đảm bảo Forward Compatibility.'
+  },
+  {
+    id: 223,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'single',
+    question: 'In standard Clean Architecture applied to a Backbase Journey, which of the following is a characteristic of the Domain Layer?',
+    options: [
+      'It is tightly coupled to the Android Framework (`android.content.Context`, `View`).',
+      'It is a Pure Kotlin layer containing Business Logic, Use Cases, and Domain Models, with zero dependency on the Android Framework or the Data Layer.',
+      'It contains Retrofit Interfaces and Room Entities.',
+      'It depends on Jetpack Compose UI.'
+    ],
+    correctAnswers: [1],
+    explanation: 'Domain Layer là trung tâm của Clean Architecture, phải hoàn toàn độc lập với các thư viện bên ngoài và Android SDK (Pure Kotlin/Java) để dễ dàng kiểm thử (Unit Test) và tái sử dụng.'
+  },
+  {
+    id: 224,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'single',
+    question: 'What is the standard UI state management pattern recommended for Backbase Android applications?',
+    options: [
+      'Multiple Data Flow.',
+      'Unidirectional Data Flow (UDF) combined with StateFlow / LiveData.',
+      'Direct View Mutation (modifying the UI directly from network callbacks).',
+      'Global EventBus registration.'
+    ],
+    correctAnswers: [1],
+    explanation: 'Unidirectional Data Flow (UDF) đảm bảo dữ liệu chảy theo một chiều: User Action -> ViewModel Process -> UI State Emit -> UI Render. Điều này giúp trạng thái UI nhất quán và dễ đoán (predictable).'
   },
   {
     id: 225,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong kiến trúc Clean Architecture chuẩn áp dụng cho Backbase Journey, tầng Domain Layer có đặc điểm nào dưới đây?',
+    question: 'When splitting a feature module into two sub-modules, `:feature-api` and `:feature-impl`, what is the primary purpose of `:feature-api`?',
     options: [
-      'Phụ thuộc chặt chẽ vào Android Framework (android.content.Context, View).',
-      'Là tầng Pure Kotlin, chứa Business Logic, Use Cases và Domain Models, hoàn toàn không phụ thuộc vào Android Framework hay Data Layer.',
-      'Chứa các file Retrofit Interface và Room Entity.',
-      'Phụ thuộc vào Jetpack Compose UI.'
+      'To contain all Compose UI and XML layouts.',
+      'To contain Interfaces, Public Data Models, and Router Contracts so other modules can depend on them without knowing the underlying implementation (Dependency Inversion).',
+      'To contain Retrofit API implementations and Data Access Objects.',
+      'To contain the feature\'s images and icons.'
     ],
     correctAnswers: [1],
-    explanation: 'Domain Layer là trung tâm của Clean Architecture, phải hoàn toàn độc lập với các thư viện bên ngoài và Android SDK (Pure Kotlin/Java) để dễ dàng kiểm thử (Unit Test) và tái sử dụng.'
+    explanation: 'Tách :feature-api giúp áp dụng nguyên lý Dependency Inversion. Các module khác chỉ cần implementation project(\':feature-api\') để gọi tính năng, giảm thời gian biên dịch (incremental build) và tránh phụ thuộc vòng.'
   },
   {
     id: 226,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Mô hình quản lý trạng thái giao diện chuẩn được khuyến nghị sử dụng trong ứng dụng Backbase Android là gì?',
+    type: 'multi',
+    question: 'To safely collect a `StateFlow` inside an Android Fragment while avoiding wasted resources or memory leaks when the app is in the background, what should you do? (Select 2)',
     options: [
-      'Multiple Data Flow.',
-      'Unidirectional Data Flow (UDF) kết hợp với StateFlow / LiveData.',
-      'Direct View Mutation (Sửa UI trực tiếp từ Callback network).',
-      'EventBus đăng ký toàn cục.'
+      'Use `lifecycleScope.launch` and collect directly without checking the Lifecycle state.',
+      'Use `viewLifecycleOwner.lifecycleScope.launch` combined with `repeatOnLifecycle(Lifecycle.State.STARTED)`.',
+      'Use the `flowWithLifecycle(viewLifecycleOwner.lifecycle)` extension before collecting.',
+      'Collect the Flow inside the ViewModel\'s `init` block.'
     ],
-    correctAnswers: [1],
-    explanation: 'Unidirectional Data Flow (UDF) đảm bảo dữ liệu chảy theo một chiều: User Action -> ViewModel Process -> UI State Emit -> UI Render. Điều này giúp trạng thái UI nhất quán và dễ đoán (predictable).'
+    correctAnswers: [1, 2],
+    explanation: 'repeatOnLifecycle và flowWithLifecycle giúp dừng việc thu thập dữ liệu (collect) khi UI xuống trạng thái STOPPED và tự động khôi phục khi UI trở lại STARTED, ngăn ngừa lãng phí CPU/Memory khi app vào background.'
   },
   {
     id: 227,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi tách một module tính năng thành 2 sub-module: :feature-api và :feature-impl, mục đích chính của :feature-api là gì?',
-    options: [
-      'Chứa toàn bộ UI Compose và Layout XML.',
-      'Chứa các Interface, Public Data Models, Router Contracs giúp các module khác phụ thuộc vào mà không cần biết cách thực thi (Dependency Inversion).',
-      'Chứa mã nguồn thực thi API Retrofit và Data Access Object.',
-      'Chứa các file ảnh và icon của tính năng.'
-    ],
-    correctAnswers: [1],
-    explanation: 'Tách :feature-api giúp áp dụng nguyên lý Dependency Inversion. Các module khác chỉ cần implementation project(\':feature-api\') để gọi tính năng, giảm thời gian biên dịch (incremental build) và tránh phụ thuộc vòng.'
-  },
-  {
-    id: 228,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'multi',
-    question: 'Để lắng nghe luồng dữ liệu StateFlow trong Android Fragment một cách an toàn, tránh lãng phí tài nguyên hay rò rỉ bộ nhớ (Memory Leak) khi app chạy ngầm, bạn nên làm gì? (Chọn 2)',
-    options: [
-      'Dùng lifecycleScope.launch và thu thập (collect) trực tiếp mà không cần kiểm tra trạng thái Lifecycle.',
-      'Sử dụng viewLifecycleOwner.lifecycleScope.launch kết hợp repeatOnLifecycle(Lifecycle.State.STARTED).',
-      'Sử dụng extension flowWithLifecycle(viewLifecycleOwner.lifecycle) trước khi collect.',
-      'Thu thập Flow trong khối init của ViewModel.'
-    ],
-    correctAnswers: [1, 2],
-    explanation: 'repeatOnLifecycle và flowWithLifecycle giúp dừng việc thu thập dữ liệu (collect) khi UI xuống trạng thái STOPPED và tự động khôi phục khi UI trở lại STARTED, ngăn ngừa lãng phí CPU/Memory khi app vào background.'
-  },
-  {
-    id: 229,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Trong ViewModel, cách khai báo trạng thái UI State nào sau đây tuân thủ đúng nguyên tắc đóng gói (Encapsulation)?',
+    question: 'Inside a `ViewModel`, which of the following UI State declarations properly adheres to the principle of **Encapsulation**?',
     options: [
       'val uiState: MutableStateFlow<MyUiState> = MutableStateFlow(InitialState)',
       'private val _uiState = MutableStateFlow<MyUiState>(InitialState)',
@@ -412,11 +412,11 @@ export const architectureQuestions: Question[] = [
     explanation: 'Khai báo này ngăn chặn việc UI Layer có thể tự ý ghi/thay đổi trạng thái trực tiếp (MutableStateFlow). Chỉ có ViewModel mới có quyền emit trạng thái mới qua _uiState.'
   },
   {
-    id: 230,
+    id: 228,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Pattern nào được Backbase áp dụng để cho phép mở rộng hoặc chèn thêm logic kiểm tra (Validation) vào trước/sau một UseCase gốc của SDK mà không làm thay đổi code gốc?',
+    question: 'Which design pattern is used by Backbase to allow extending or injecting custom validation logic before/after an original SDK `UseCase` without modifying its source code?',
     options: [
       'Singleton Pattern.',
       'Decorator Pattern.',
@@ -427,131 +427,131 @@ export const architectureQuestions: Question[] = [
     explanation: 'Decorator Pattern cho phép bọc (wrap) UseCase mặc định của Backbase, thực thi thêm logic tùy biến (ví dụ: kiểm tra hạn mức giao dịch), sau đó gọi UseCase gốc hoặc chặn không cho gọi tiếp.'
   },
   {
-    id: 231,
+    id: 229,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi cần mapping một Data Transfer Object (DTO) nhận từ Backend API sang Domain Model, vị trí đúng chuẩn kiến trúc để thực hiện việc này là ở đâu?',
+    question: 'When mapping a Data Transfer Object (DTO) received from a Backend API into a Domain Model, where is the architecturally correct place to perform this mapping?',
     options: [
-      'Trong Fragment hoặc Composable function.',
-      'Trong Repository implementation thuộc Data Layer.',
-      'Trong Layout XML.',
-      'Trong OkHttp Interceptor.'
+      'Inside a Fragment or Composable function.',
+      'Inside the Repository implementation in the Data Layer.',
+      'Inside an XML Layout.',
+      'Inside an OkHttp Interceptor.'
     ],
     correctAnswers: [1],
     explanation: 'Data Layer (cụ thể là Repository Impl) chịu trách nhiệm nhận DTO từ API, biến đổi (map) chúng thành Domain Model thuần túy trước khi trả về cho Domain/UseCase Layer.'
+  },
+  {
+    id: 230,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'single',
+    question: 'How should navigation between two completely independent Journeys (e.g., navigating from the Accounts Journey to the Transfer Journey) be implemented to ensure **Loose Coupling**?',
+    options: [
+      'Directly import `TransferActivity` into `AccountFragment` and call `startActivity`.',
+      'Directly call the Transfer Journey\'s `ViewModel` from inside the Accounts Journey.',
+      'Use a Navigation Router Interface defined in the API module and implemented at the Integrator level (or via Deep Links).',
+      'Use global `static` variables to pass data and launch the Activity.'
+    ],
+    correctAnswers: [2],
+    explanation: 'Sử dụng Router Interface giúp Journey A không cần biết sự tồn tại thực tế của Journey B (zero-coupling), việc điều hướng thực sự do Integrator Module lắp ráp và xử lý.'
+  },
+  {
+    id: 231,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'multi',
+    question: 'An Android architecture that strictly adheres to Clean Architecture will NOT allow which of the following in the **Domain Layer**? (Select 2)',
+    options: [
+      'Importing `android.widget.Toast` or `android.view.View` packages.',
+      'Declaring Kotlin interfaces for Repositories.',
+      'Using Jackson/Gson/Moshi annotations such as `@SerializedName` or `@JsonProperty`.',
+      'Declaring UseCases/Interactors containing pure business logic.'
+    ],
+    correctAnswers: [0, 2],
+    explanation: 'Domain Layer phải là Pure Kotlin. Việc xuất hiện Android UI Component (Toast, View) hoặc các Annotation biến đổi JSON của Data Layer là vi phạm nguyên tắc phân tầng.'
   },
   {
     id: 232,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Điều khiển điều hướng (Navigation) giữa 2 Journey hoàn toàn độc lập (ví dụ: từ Journey Tài khoản chuyển sang Journey Chuyển tiền) nên được thực hiện như thế nào để đảm bảo Loose Coupling?',
+    question: 'What does the concept of **"Single Source of Truth" (SSOT)** mean in mobile application data management?',
     options: [
-      'Import trực tiếp TransferActivity vào AccountFragment và gọi startActivity.',
-      'Gọi trực tiếp ViewModel của Journey Chuyển tiền trong Journey Tài khoản.',
-      'Sử dụng Navigation Router Interface định nghĩa ở API module và được triển khai ở Integrator level (hoặc Deeplink).',
-      'Dùng biến static toàn cục để chuyển dữ liệu và mở Activity.'
+      'Data is only allowed to be stored on the Server, never on the Client.',
+      'A single data source (typically a Repository/Local DB) is solely responsible for providing and updating the authoritative state across the entire app.',
+      'All data must be stored in `SharedPreferences`.',
+      'Every UI Composable must manage its own internal state independently.'
     ],
-    correctAnswers: [2],
-    explanation: 'Sử dụng Router Interface giúp Journey A không cần biết sự tồn tại thực tế của Journey B (zero-coupling), việc điều hướng thực sự do Integrator Module lắp ráp và xử lý.'
+    correctAnswers: [1],
+    explanation: 'SSOT đảm bảo rằng mọi thành phần trên UI đều tiêu thụ dữ liệu từ một nguồn duy nhất. Khi nguồn này cập nhật, tất cả UI liên quan đều được cập nhật đồng bộ, tránh lệch dữ liệu.'
   },
   {
     id: 233,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'multi',
-    question: 'Một kiến trúc Android tuân thủ Clean Architecture chuẩn sẽ KHÔNG cho phép điều nào sau đây xuất hiện trong Domain Layer? (Chọn 2)',
+    type: 'single',
+    question: 'Why must the Domain Layer in Clean Architecture be written in **Pure Kotlin**?',
     options: [
-      'Import package android.widget.Toast hoặc android.view.View.',
-      'Khai báo các Kotlin Interface cho Repository.',
-      'Sử dụng các annotation của Jackson/Gson/Moshi như @SerializedName hay @JsonProperty.',
-      'Khai báo các UseCase/Interactor chứa pure business logic.'
+      'To optimize battery consumption.',
+      'To completely decouple Business Logic from the Android framework, making the code easy to unit test and platform-independent.',
+      'Because Android Studio forbids writing Java in the Domain Layer.',
+      'To automatically compile into native Assembly binary code.'
     ],
-    correctAnswers: [0, 2],
-    explanation: 'Domain Layer phải là Pure Kotlin. Việc xuất hiện Android UI Component (Toast, View) hoặc các Annotation biến đổi JSON của Data Layer là vi phạm nguyên tắc phân tầng.'
+    correctAnswers: [1],
+    explanation: 'Pure Kotlin đảm bảo Domain Layer không bị dính líu đến Android Framework, dễ kiểm thử và bền vững.'
   },
   {
     id: 234,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Khái niệm "Single Source of Truth" (SSOT) trong quản lý dữ liệu ứng dụng mobile nghĩa là gì?',
+    type: 'multi',
+    question: 'Which components belong to the **Domain Layer** in a Journey? (Select 2)',
     options: [
-      'Dữ liệu chỉ được phép lưu ở Server, không lưu dưới Client.',
-      'Một nguồn dữ liệu duy nhất (thường là Repository/Local DB) chịu trách nhiệm cung cấp và cập nhật trạng thái chuẩn xác nhất cho toàn bộ app.',
-      'Tất cả dữ liệu phải được lưu trong SharedPreferences.',
-      'Tất cả UI Composable phải tự quản lý state nội bộ.'
+      'Use Cases / Interactors.',
+      'Business Domain Entities / Models.',
+      'Room Database DAOs.',
+      'Retrofit Service Interfaces.'
     ],
-    correctAnswers: [1],
-    explanation: 'SSOT đảm bảo rằng mọi thành phần trên UI đều tiêu thụ dữ liệu từ một nguồn duy nhất. Khi nguồn này cập nhật, tất cả UI liên quan đều được cập nhật đồng bộ, tránh lệch dữ liệu.'
+    correctAnswers: [0, 1],
+    explanation: 'Domain Layer chỉ chứa Use Cases, Domain Models và Repository Interfaces.'
   },
   {
     id: 235,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Tại sao Domain Layer trong Clean Architecture phải là Pure Kotlin?',
+    question: 'What problem does **Unidirectional Data Flow (UDF)** solve in the Presentation Layer?',
     options: [
-      'Để tối ưu hóa việc tiêu thụ pin.',
-      'Để tách biệt hoàn toàn Business Logic khỏi framework Android, giúp code dễ Unit Test và độc lập với nền tảng.',
-      'Vì Android Studio cấm viết Java trong Domain Layer.',
-      'Để tự động chuyển đổi sang mã nhị phân Assembly.'
+      'It reduces the file size of drawable images.',
+      'It ensures the UI state is consistent, predictable, and easy to debug.',
+      'It upgrades cellular data speed from 4G to 5G.',
+      'It completely eliminates the need to use a `ViewModel`.'
     ],
     correctAnswers: [1],
-    explanation: 'Pure Kotlin đảm bảo Domain Layer không bị dính líu đến Android Framework, dễ kiểm thử và bền vững.'
+    explanation: 'UDF ngăn ngừa việc đột biến trạng thái từ nhiều nguồn, đảm bảo trạng thái UI chỉ phát ra từ ViewModel.'
   },
   {
     id: 236,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'multi',
-    question: 'Các thành phần nào thuộc về Domain Layer trong một Journey? (Chọn 2)',
+    type: 'single',
+    question: 'When a `ViewModel` exposes UI State as a `StateFlow`, why should the backing `MutableStateFlow` be kept `private`?',
     options: [
-      'Use Cases / Interactors.',
-      'Business Domain Entities / Models.',
-      'Room Database DAO.',
-      'Retrofit Service Interface.'
+      'To prevent the View layer from directly mutating the UI state outside the `ViewModel`\'s control.',
+      'Because Kotlin requires all properties inside a `ViewModel` to be `private`.',
+      'To increase heap memory capacity.',
+      'To avoid having to use Coroutines.'
     ],
-    correctAnswers: [0, 1],
-    explanation: 'Domain Layer chỉ chứa Use Cases, Domain Models và Repository Interfaces.'
+    correctAnswers: [0],
+    explanation: 'Nguyên tắc Encapsulation: chỉ ViewModel mới có quyền thay đổi trạng thái UI.'
   },
   {
     id: 237,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Luồng dữ liệu đơn hướng (UDF) trong Presentation Layer giúp giải quyết vấn đề gì?',
-    options: [
-      'Giảm kích thước ảnh trong drawable.',
-      'Đảm bảo trạng thái UI nhất quán, có thể dự đoán được (predictable) và dễ dàng debug.',
-      'Tăng tốc độ tải dữ liệu từ 4G lên 5G.',
-      'Loại bỏ hoàn toàn việc sử dụng ViewModel.'
-    ],
-    correctAnswers: [1],
-    explanation: 'UDF ngăn ngừa việc đột biến trạng thái từ nhiều nguồn, đảm bảo trạng thái UI chỉ phát ra từ ViewModel.'
-  },
-  {
-    id: 238,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Khi ViewModel phát ra UI State dưới dạng StateFlow, tại sao nên dùng MutableStateFlow ở mức private?',
-    options: [
-      'Để tránh việc tầng View có thể can thiệp làm thay đổi trực tiếp trạng thái UI ngoài tầm kiểm soát của ViewModel.',
-      'Vì Kotlin bắt buộc tất cả biến trong ViewModel phải là private.',
-      'Để tăng dung lượng bộ nhớ heap.',
-      'Để tránh phải sử dụng Coroutines.'
-    ],
-    correctAnswers: [0],
-    explanation: 'Nguyên tắc Encapsulation: chỉ ViewModel mới có quyền thay đổi trạng thái UI.'
-  },
-  {
-    id: 239,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Để thu thập StateFlow trong Jetpack Compose một cách nhận biết vòng đời (Lifecycle-aware), hàm nào được khuyến nghị?',
+    question: 'Which function is recommended for collecting a `StateFlow` in Jetpack Compose in a lifecycle-aware manner?',
     options: [
       'flow.collect()',
       'flow.collectAsStateWithLifecycle()',
@@ -562,26 +562,26 @@ export const architectureQuestions: Question[] = [
     explanation: 'collectAsStateWithLifecycle() tự động dừng thu thập khi Composable không hiển thị, tiết kiệm tài nguyên.'
   },
   {
-    id: 240,
+    id: 238,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'multi',
-    question: 'Những vai trò chính của Use Case trong Clean Architecture là gì? (Chọn 2)',
+    question: 'What are the primary responsibilities of a **Use Case** in Clean Architecture? (Select 2)',
     options: [
-      'Đóng gói một logic nghiệp vụ duy nhất (Single Responsibility).',
-      'Điều phối dữ liệu giữa các Repository Interfaces mà không quan tâm nguồn dữ liệu cụ thể.',
-      'Trực tiếp gọi hàm findViewById để đổi màu chữ trên màn hình.',
-      'Lưu trữ chuỗi JSON vào bộ nhớ đệm SQLite.'
+      'Encapsulate a single unit of business logic (Single Responsibility).',
+      'Orchestrate data between Repository Interfaces without knowing the underlying data source details.',
+      'Directly call `findViewById` to change text colors on the screen.',
+      'Cache raw JSON strings directly into SQLite.'
     ],
     correctAnswers: [0, 1],
     explanation: 'Use Case điều phối nghiệp vụ và tuân thủ nguyên lý Single Responsibility.'
   },
   {
-    id: 241,
+    id: 239,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong Kotlin Coroutines, hàm nào thường được sử dụng trong Use Case để bắt lỗi và trả về Result<T>?',
+    question: 'In Kotlin Coroutines, which function is commonly used inside a Use Case to catch exceptions and return a `Result<T>`?',
     options: [
       'runBlocking { }',
       'runCatching { }',
@@ -592,106 +592,106 @@ export const architectureQuestions: Question[] = [
     explanation: 'runCatching đóng gói kết quả thực thi thành Result.success hoặc Result.failure an toàn.'
   },
   {
-    id: 242,
+    id: 240,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Thành phần Mapper trong Data Layer chịu trách nhiệm gì?',
+    question: 'What is the **Mapper** component in the Data Layer responsible for?',
     options: [
-      'Chuyển đổi qua lại giữa DTO (từ API/Database) và Domain Model thuần túy.',
-      'Vẽ bản đồ chi nhánh ngân hàng trên Google Maps.',
-      'Chuyển đổi layout XML sang Composable.',
-      'Nén dữ liệu truyền qua mạng.'
+      'Converting back and forth between DTOs (from API/Database) and pure Domain Models.',
+      'Drawing bank branch locations on Google Maps.',
+      'Converting XML layouts into Composables.',
+      'Compressing data transmitted over the network.'
     ],
     correctAnswers: [0],
     explanation: 'Mapper cách ly chi tiết dữ liệu mạng khỏi Domain Layer, bảo vệ UI không vỡ khi API đổi schema.'
+  },
+  {
+    id: 241,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'single',
+    question: 'When two independent Journeys need to navigate to one another, why should you NOT directly launch an `Intent` targeting the other Journey\'s `Activity`?',
+    options: [
+      'Because Android forbids calling Activities across modules.',
+      'Because it creates tight coupling, breaking module independence and reusability.',
+      'Because it causes a stack overflow crash.',
+      'Because Google Play will reject the app.'
+    ],
+    correctAnswers: [1],
+    explanation: 'Phải sử dụng Router Interface để đảm bảo zero-coupling giữa các Journey.'
+  },
+  {
+    id: 242,
+    section: 'architecture',
+    sectionName: 'Section 2: Mobile Essentials Android Architecture',
+    type: 'multi',
+    question: 'When should a property in a `ViewModel` be managed via `SavedStateHandle`? (Select 2)',
+    options: [
+      'When storing critical navigation arguments or session/item IDs.',
+      'When preserving unsaved user form input across system-initiated Process Death caused by low memory.',
+      'When storing a 50MB bitmap image.',
+      'When permanently storing the user\'s account password.'
+    ],
+    correctAnswers: [0, 1],
+    explanation: 'SavedStateHandle dùng để lưu các dữ liệu trạng thái nhẹ giúp phục hồi sau Process Death.'
   },
   {
     id: 243,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khi hai Journey độc lập cần điều hướng qua lại, tại sao KHÔNG NÊN gọi trực tiếp Intent tới Activity của Journey kia?',
-    options: [
-      'Vì Android cấm gọi Activity giữa các module.',
-      'Vì tạo ra sự phụ thuộc cứng (tight coupling), phá vỡ tính độc lập và khả năng tái sử dụng module.',
-      'Vì gây crash do tràn bộ nhớ stack.',
-      'Vì Google Play từ chối phê duyệt.'
-    ],
-    correctAnswers: [1],
-    explanation: 'Phải sử dụng Router Interface để đảm bảo zero-coupling giữa các Journey.'
-  },
-  {
-    id: 244,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'multi',
-    question: 'Khi nào một biến trong ViewModel nên được quản lý qua SavedStateHandle? (Chọn 2)',
-    options: [
-      'Khi cần lưu trữ các tham số điều hướng hoặc ID phiên làm việc quan trọng.',
-      'Khi muốn trạng thái form nhập dở của người dùng sống sót qua sự kiện Process Death do thiếu RAM.',
-      'Khi muốn lưu trữ ảnh bitmap dung lượng 50MB.',
-      'Khi cần lưu mật khẩu tài khoản người dùng vĩnh viễn.'
-    ],
-    correctAnswers: [0, 1],
-    explanation: 'SavedStateHandle dùng để lưu các dữ liệu trạng thái nhẹ giúp phục hồi sau Process Death.'
-  },
-  {
-    id: 245,
-    section: 'architecture',
-    sectionName: 'Section 2: Mobile Essentials Android Architecture',
-    type: 'single',
-    question: 'Trong MVI/UDF, sự kiện diễn ra 1 lần (One-off Event như SnackBar, Navigate) nên được phát qua thành phần nào?',
+    question: 'In MVI/UDF, through which construct should a one-off event (such as showing a Snackbar or triggering Navigation) be emitted?',
     options: [
       'MutableStateFlow',
-      'SharedFlow(replay = 0) hoặc Channel',
-      'Biến Boolean static',
+      'SharedFlow(replay = 0) or Channel',
+      'A static Boolean variable',
       'SharedPreferences'
     ],
     correctAnswers: [1],
     explanation: 'SharedFlow với replay = 0 hoặc Channel đảm bảo sự kiện chỉ được xử lý một lần duy nhất.'
   },
   {
-    id: 246,
+    id: 244,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Khái niệm \'Dependency Inversion\' trong việc tách module :api và :impl thể hiện ở điểm nào?',
+    question: 'How is **Dependency Inversion** demonstrated when splitting a feature into `:api` and `:impl` modules?',
     options: [
-      'Module :impl phụ thuộc vào :api, và các module khác chỉ cần phụ thuộc vào :api mà không cần biết chi tiết bên trong :impl.',
-      'Tất cả các module đều phụ thuộc vào module :app.',
-      'Không có module nào được sử dụng Interface.',
-      'Đảo ngược thứ tự biên dịch của Gradle.'
+      'The `:impl` module depends on `:api`, and other modules only need to depend on `:api` without knowing the internal details of `:impl`.',
+      'All modules depend on the `:app` module.',
+      'No module is allowed to use Interfaces.',
+      'It reverses Gradle\'s compilation order.'
     ],
     correctAnswers: [0],
     explanation: 'Các module phụ thuộc vào trừu tượng (Interface contract ở :api) thay vì phụ thuộc vào thực thi cụ thể (:impl).'
   },
   {
-    id: 247,
+    id: 245,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'Trong Clean Architecture, quy tắc phụ thuộc (Dependency Rule) khẳng định điều gì?',
+    question: 'In Clean Architecture, what does the **Dependency Rule** state?',
     options: [
-      'Mã nguồn ở tầng bên trong không bao giờ được biết đến bất kỳ điều gì ở tầng bên ngoài.',
-      'Tầng Domain phụ thuộc trực tiếp vào tầng Data.',
-      'Tầng Presentation phụ thuộc trực tiếp vào cơ sở dữ liệu.',
-      'Tất cả các tầng đều phụ thuộc vào Android SDK.'
+      'Source code in an inner layer must never know anything about an outer layer.',
+      'The Domain layer depends directly on the Data layer.',
+      'The Presentation layer depends directly on the database.',
+      'All layers depend on the Android SDK.'
     ],
     correctAnswers: [0],
     explanation: 'Mọi phụ thuộc mã nguồn đều hướng vào trong, Domain Layer ở trung tâm không biết về các tầng ngoài.'
   },
   {
-    id: 248,
+    id: 246,
     section: 'architecture',
     sectionName: 'Section 2: Mobile Essentials Android Architecture',
     type: 'single',
-    question: 'State Hoisting trong Jetpack Compose mang lại lợi ích lớn nhất nào?',
+    question: 'What is the biggest benefit of **State Hoisting** in Jetpack Compose?',
     options: [
-      'Làm cho Composable trở nên Stateless, dễ tái sử dụng và kiểm thử độc lập.',
-      'Giúp Composable tự động lưu dữ liệu vào đĩa cứng.',
-      'Tăng xung nhịp xử lý của GPU.',
-      'Giảm số lượng Composable trong project.'
+      'It makes a Composable stateless, reusable, and independently testable.',
+      'It makes a Composable automatically save data to the hard drive.',
+      'It increases the GPU clock speed.',
+      'It reduces the number of Composables in the project.'
     ],
     correctAnswers: [0],
     explanation: 'State Hoisting đẩy State lên cấp trên, biến component thành Stateless và dễ test.'

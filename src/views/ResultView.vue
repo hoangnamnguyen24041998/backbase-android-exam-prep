@@ -17,7 +17,7 @@ import { EXAM_CONFIG, EXAM_SECTIONS, type SectionId } from '@/models/exam.types'
 import { useExamViewModel } from '@/viewmodels/useExamViewModel'
 import { useReviewViewModel, type ReviewStatusFilter } from '@/viewmodels/useReviewViewModel'
 
-const { latestResult, startNewExam, navigateTo } = useExamViewModel()
+const { latestResult, openDedicatedExamTab, navigateTo } = useExamViewModel()
 
 const {
   statusFilter,
@@ -140,10 +140,10 @@ function scrollToQuestionCard(questionId: number) {
             <button
               type="button"
               class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-colors cursor-pointer"
-              @click="startNewExam(false, false)"
+              @click="openDedicatedExamTab(true)"
             >
               <RotateCcw class="w-4 h-4 shrink-0" />
-              <span>Tạo đề thi mới</span>
+              <span>Thi thử đề mới (Mở Tab mới)</span>
             </button>
             <button
               type="button"

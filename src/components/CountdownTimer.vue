@@ -28,7 +28,7 @@ const formattedTime = computed(() => {
           ? 'bg-amber-50 border-amber-300 text-amber-800'
           : 'bg-slate-100/80 border-slate-200/80 text-slate-800'
     ]"
-    title="Thời gian làm bài còn lại (90 phút)"
+    title="Remaining Exam Time (90 minutes)"
   >
     <AlertTriangle v-if="isCritical" class="w-4 h-4 text-rose-600 shrink-0" />
     <Clock v-else class="w-4 h-4 shrink-0" :class="isWarning ? 'text-amber-600' : 'text-slate-500'" />

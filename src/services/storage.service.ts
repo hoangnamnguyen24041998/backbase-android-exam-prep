@@ -1,10 +1,14 @@
 import type { ExamResult, ExamSession } from '@/models/exam.types'
 
 const STORAGE_KEYS = {
-  ACTIVE_SESSION: 'bb_android_exam_active_session_v1',
+  ACTIVE_SESSION: 'bb_android_exam_active_session_v3_english_only',
+  LEGACY_SESSIONS: ['bb_android_exam_active_session_v1', 'bb_android_exam_active_session_v2_en'],
   EXAM_HISTORY: 'bb_android_exam_history_v1',
   BOOKMARKED_QUESTION_IDS: 'bb_android_exam_bookmarks_v1'
 } as const
+
+const VIETNAMESE_CHAR_REGEX =
+  /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]/
 
 export class StorageService {
   /**
@@ -23,13 +27,29 @@ export class StorageService {
   }
 
   /**
-   * Loads the active in-progress exam session if present
+   * Loads the active in-progress exam session if present.
+   * Automatically discards any legacy cached session that still contains Vietnamese in question/options.
    */
   static loadActiveSession(): ExamSession | null {
     try {
+      for (const legacyKey of STORAGE_KEYS.LEGACY_SESSIONS) {
+        localStorage.removeItem(legacyKey)
+      }
       const raw = localStorage.getItem(STORAGE_KEYS.ACTIVE_SESSION)
       if (!raw) return null
-      return JSON.parse(raw) as ExamSession
+      const parsed = JSON.parse(raw) as ExamSession
+      if (
+        !parsed.questions ||
+        parsed.questions.some(
+          (q) =>
+            VIETNAMESE_CHAR_REGEX.test(q.question) ||
+            q.options.some((opt) => VIETNAMESE_CHAR_REGEX.test(opt))
+        )
+      ) {
+        localStorage.removeItem(STORAGE_KEYS.ACTIVE_SESSION)
+        return null
+      }
+      return parsed
     } catch (err) {
       console.error('Failed to load active exam session:', err)
       return null
